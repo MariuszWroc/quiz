@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">        
+        <h:head>
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+        </h:head>
+        <h:body>
+            <ui:composition template="/template.xhtml">
+                <ui:define name="content">
+                    <h:form>
+                        <p:growl id="settingGrowl" sticky="true" showDetail="true"/>
+                        <p:panel id="questionPanel" header="QuestionPanel">
+                            <p:messages />
+                            <h:panelGrid id="counterGrid" columns="2" cellpadding="5">
+                                <h:outputText value="Question left: " />
+                                <h:outputText id="output" value="#{quizController.questionCounter}" />
+                            </h:panelGrid>
+                            <h:panelGrid id="quizGrid" columns="1" columnClasses="label, value" cellpadding="5">
+                                <p:outputLabel for="answer" value="#{quizController.questionDescription}" />
+                                <p:selectOneRadio id="answer"  value="#{quizController.selectedAnswer}" layout="grid" columns="1" required="true" requiredMessage="Choose an answer" >
+                                    <f:selectItems id="answerRadioButton" value="#{quizController.answerList}" var="entry" itemLabel="#{answer}" itemValue="#{answer}" />
+                                </p:selectOneRadio>
+                            </h:panelGrid>
+                        </p:panel>
+                        <p:commandButton value="Next" ajax="false" action="#{quizController.nextQuestion()}" update="settingGrowl" process="@this"/>
+                    </h:form>
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <!--<h:outputStylesheet name="css/home.css"/>-->
+        <meta name="viewport" content="width=device-width"/>
+        <title>home page</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <div id="page">
+                <div id="top" class="top">
+                    <p:menubar >
+                        <p:submenu label="Nowa gra">
+                            <p:menuitem value="Rozgrywka czasowa" outcome="/menu/game/questionnaire"/>
+                            <p:menuitem value="Tryb nauki" outcome="/menu/game/learning"/>
+                        </p:submenu>
+                        <p:menuitem value="Ranking" outcome="/menu/ranking/rankings"/>
+                        <p:submenu label="Ustawienia">
+                            <p:menuitem value="Edycja pytań" outcome="/menu/settings/editQuestions"/>
+                            <p:menuitem value="Import/Eksport" outcome="/menu/settings/importExport"/> 
+                            <p:menuitem value="Wydarzenie" outcome="/menu/settings/schedule"/>    
+                            <p:menuitem value="Zaawansowane" outcome="/menu/settings/advanced"/>                                 
+                        </p:submenu>
+                        <p:menuitem value="Info" icon="ui-icon-star" outcome="/test"/>
+                    </p:menubar>
+                </div>
+                <div id="bottom" class="bottom">
+                    <p:layout style="height:1024px;">
+                        <p:layoutUnit position="center">
+                            <div id="content" class="center_content">
+                                <ui:insert name="content">Content</ui:insert>
+                            </div>
+                        </p:layoutUnit>
+                    </p:layout>
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+</html>

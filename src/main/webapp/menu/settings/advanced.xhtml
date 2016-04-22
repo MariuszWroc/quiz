@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+        </h:head>
+        <h:body>
+            <ui:composition template="/template.xhtml">
+                <ui:define name="content">
+                    <h:form enctype="multipart/form-data">
+                        <p:panel id="settingsPanel" header="Ustaw swój email" >
+                            <p:messages autoUpdate="true"/>
+                            <p:growl id="growl"/>
+                            <h:panelGrid id="settingsPanelGrid" columns="2" cellpadding="5">
+                                <p:outputLabel for="personalEmail" value="Email" />
+                                <p:inputText id="personalEmail" value="#{settingController.setting.personalEmail}" type="email" placeholder="your e-mail address"/>
+                                <p:outputLabel for="questionPoolSize" value="Liczba pytań" />
+                                <p:spinner id="questionPoolSize" value="#{settingController.setting.questionPoolSize}" min="1"/>
+                                <p:outputLabel for="timeForAnswer" value="Czas" />
+                                <p:spinner id="timeForAnswer" value="#{settingController.setting.timeForAnswer}" min="1" onchange=""/>
+                                <p:outputLabel for="themeSwitcher" value="Wybierz layout" /> 
+                                <p:themeSwitcher id="themeSwitcher" value="#{themeController.theme}" effectSpeed="normal" effect="fold" style="width:165px" >
+                                    <f:selectItems value="#{themeController.themes}" />
+                                    <p:ajax global="false" listener="#{themeController.saveTheme}" />
+                                </p:themeSwitcher>
+                            </h:panelGrid>
+                            <p:commandButton value="Zapisz" update="growl" actionListener="#{settingController.buttonAction}" />
+                        </p:panel>
+                    </h:form>
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>

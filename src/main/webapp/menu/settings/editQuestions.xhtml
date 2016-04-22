@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+        </h:head>
+        <h:body>
+            <ui:composition template="/template.xhtml">
+                <ui:define name="content">
+                    <!--<h:form id="form">-->   
+                    <p:growl id="growl" showDetail="true"/>   
+                    <p:panel id="masterPanel" style="margin-bottom:20px ">
+                        <p:dataTable id="masterTable" var="selectedQuestion" value="#{questionController.questionList}" paginator="true" rows="10" 
+                                     emptyMessage="brak pytań w puli"  rowKey="#{selectedQuestion.id}" selection="#{questionController.selectedQuestion}" 
+                                     selectionMode="single"  editable="true" >  
+
+                            <p:ajax event="rowSelect" listener="#{questionController.onRowSelect}"   
+                                    update=":form:detailTable :form:growl" />  
+                            <p:ajax event="rowUnselect" listener="#{questionController.onRowUnselect}" update=":form:detailTable :form:growl"/>  
+                            <p:ajax event="rowEdit" listener="#{questionController.onRowEdit}" update=":form:growl" />
+                            <p:ajax event="rowEditCancel" listener="#{questionController.onRowCancel}" update=":form:growl" />
+
+
+                            <p:column headerText="Pytania">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{selectedQuestion.description}" />
+                                        <f:facet name="input"><p:inputText id="modelInput" value="#{selectedQuestion.description}" style="width:100%"/></f:facet>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column style="width:32px">
+                                <p:rowEditor />
+                            </p:column>
+
+                        </p:dataTable>
+                        <p:commandButton value="Usuń" id="deleteQuestion" update="growl" actionListener="#{questionController.buttonDeleteQuestion}"/>
+                        <p:commandButton value="Aktualizuj" id="updateQuestion" update="growl" actionListener="#{questionController.buttonUdateQuestion}"/>
+                        <p:commandButton value="Dodaj" id="addQuestion" update="growl" actionListener="#{questionController.buttonAddQuestion}" onclick="PF('addQuestionDialog').show();"/>
+                    </p:panel>
+                    <p:panel id="detailPanel" style="margin-bottom:20px ">
+                        <p:dataTable id="detailTable" var="answer" value="#{questionController.selectedQuestion.answerList}" paginator="false" rows="4" emptyMessage="brak odpowiedzi"
+                                     rowKey="#{answer.id}" selection="#{questionController.selectedAnswer}" selectionMode="single">   
+                            <p:column headerText="Odpowiedzi">  
+                                #{answer.description}  
+                            </p:column>  
+                        </p:dataTable> 
+                        <p:commandButton value="Usuń" id="deleteAnswer" update="growl" actionListener="#{questionController.buttonDeleteAnswer}"/>
+                        <p:commandButton value="Aktualizuj" id="updateAnswer" update="growl" actionListener="#{questionController.buttonUdateAnswer}"/>
+                        <p:commandButton value="Dodaj" id="addAnswer" update="growl" actionListener="#{questionController.buttonAddAnswer}" onclick="PF('addAnswerDialog').show();"/>
+                    </p:panel>                
+
+                    <p:dialog header="Dodaj pytanie" widgetVar="addQuestionDialog" minHeight="40">
+                        <h:outputText value="This is a Modal Dialog." />
+                    </p:dialog>
+                    <p:dialog header="Dodaj odpowiedz" widgetVar="addAnswerDialog" minHeight="40">
+                        <h:outputText value="This is a Modal Dialog." />
+                    </p:dialog>
+                    <!--</h:form>--> 
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>
+

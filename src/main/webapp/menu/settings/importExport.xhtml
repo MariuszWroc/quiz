@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+        </h:head>
+        <h:body>
+            <ui:composition template="/template.xhtml">
+                <ui:define name="content">
+                    <h:form enctype="multipart/form-data">
+                        <!--<p:growl id="messages" showDetail="true" />-->
+                        <p:panel id="uploadQuestionPanel" header="Wczytanie pytań" >
+                            <p:fileUpload value="#{fileController.file}" mode="simple" update="messages" auto="true" sizeLimit="100000" allowTypes="/(\.|\/)(xml)$/"/><br/>
+                            <p:commandButton value="Submit" ajax="false" actionListener="#{fileController.upload}" disabled="true" />
+                        </p:panel>
+                        <p:panel id="downloadQuestionPanel" header="Sciągnięcie wyników do pliku" >
+                            <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                                <p:fileDownload value="#{fileController.file}" />
+                            </p:commandButton>
+                        </p:panel>
+                        <p:panel id="sendFilesOnEmailPanel" header="Przesłanie wyników na email" >
+                                <h:panelGrid id="emailSenderGrid" columns="2">
+                                    <p:outputLabel for="title" value="Title:" />
+                                    <p:inputText id="title" value="" required="true" />
+                                    <p:outputLabel for="body" value="Body" />
+                                    <p:inputText id="body" value="" required="true" />
+                                </h:panelGrid>
+                            <p:commandButton value="Prześlij" ajax="false"/>
+                        </p:panel>
+                        <p:panel id="printPanel" header="Wydrukuj" >
+                                <h:panelGrid id="printGrid" columns="2">
+                                    <p:outputLabel for="printResult" value="Title:" />
+                                    <p:inputText id="printResult" value="" required="true" />
+                                    <!--<p:printer target="printResult" />-->
+                                </h:panelGrid>
+                            <p:commandButton value="Prześlij" icon="ui-icon-print" ajax="false"/>
+                        </p:panel>
+                    </h:form>
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>
