@@ -13,13 +13,13 @@ import java.util.logging.Logger;
  * @param <T>
  */
 public class StringWorker<T> {
-    private static final Logger LOG = Logger.getLogger(StringWorker.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(StringWorker.class.getName());
     private static final String EXTENSION = "xml";
     
     public String createDirectory(T entity, String directory) throws NoSuchMethodException {
         String filepathWithFilename = "";
         StringBuilder builder = new StringBuilder(filepathWithFilename);
-        LOG.info("variables " + entity.toString() + " " + directory);
+        LOGGER.info("variables " + entity.toString() + " " + directory);
         builder
                 .append(directory)
                 .append("\\")
@@ -27,7 +27,7 @@ public class StringWorker<T> {
                 .append("\\");
 
         filepathWithFilename = builder.toString();
-        LOG.info(filepathWithFilename);
+        LOGGER.info(filepathWithFilename);
 
         return filepathWithFilename;
     }
@@ -43,7 +43,7 @@ public class StringWorker<T> {
     public String createDirectory(T entity, String path, String filename) throws NoSuchMethodException {
         String filepathWithFilename = "";
         StringBuilder builder = new StringBuilder(filepathWithFilename);
-        LOG.info("filename " + filename + ".xml");
+        LOGGER.info("filename " + filename + ".xml");
         builder
                 .append(path)
                 .append("\\")
@@ -53,7 +53,7 @@ public class StringWorker<T> {
                 .append(EXTENSION);
 
         filepathWithFilename = builder.toString();
-        LOG.info(filepathWithFilename);
+        LOGGER.info(filepathWithFilename);
 
         return filepathWithFilename;
     }     

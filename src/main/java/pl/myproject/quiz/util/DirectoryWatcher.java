@@ -22,8 +22,10 @@ import java.nio.file.WatchEvent;
 import java.nio.file.WatchEvent.Kind;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
+import java.util.logging.Logger;
 
 public class DirectoryWatcher implements Runnable {
+    private static final Logger LOGGER = Logger.getLogger(DirectoryWatcher.class.getName());
     private String sharedDirectory;
     private WatchService service;
 
@@ -58,7 +60,7 @@ public class DirectoryWatcher implements Runnable {
                     } else if (ENTRY_MODIFY == kind) {
                         path = ((WatchEvent<Path>) watchEvent).context();
                     } else if (ENTRY_DELETE == kind) {
-                        System.out.println("delete");
+                        LOGGER.info("delete");
                         path = ((WatchEvent<Path>) watchEvent).context();
                     }
                 }
@@ -68,12 +70,12 @@ public class DirectoryWatcher implements Runnable {
             }
         } catch (IOException | InterruptedException e) {
             if (e instanceof java.nio.file.ClosedWatchServiceException) {
-                System.out.println("closing wathcer");
+                LOGGER.info("closing wathcer");
             } else {
                 e.getMessage();
             }
         }
-        System.out.println("thread end");
+        LOGGER.info("thread end");
     }
 
     public void stopWatching() {
@@ -112,9 +114,9 @@ public class DirectoryWatcher implements Runnable {
         File shared = new File(sharedDirectory.trim());
         if (!shared.exists()) {
             if (shared.mkdirs()) {
-                System.out.println("Directory is created!");
+                LOGGER.info("Directory is created!");
             } else {
-                System.out.println("Failed to create directory!");
+                LOGGER.info("Failed to create directory!");
             }
         }
         return shared.toPath();

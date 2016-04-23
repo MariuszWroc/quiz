@@ -13,7 +13,7 @@ import java.util.Random;
  *
  * @author Mariusz Czarny
  */
-public class RandomizeValue {
+public final class RandomizeValue {
 
     /**
      *

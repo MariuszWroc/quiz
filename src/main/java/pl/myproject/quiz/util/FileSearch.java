@@ -9,12 +9,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Mariusz Czarny
  */
 public final class FileSearch {
+  private static final Logger LOGGER = Logger.getLogger(FileSearch.class.getName());
   private String fileNameToSearch;
   private final List<String> result = new ArrayList<>();
 	
@@ -39,14 +41,14 @@ public final class FileSearch {
 
 	int count = fileSearch.getResult().size();
 	if(count == 0){
-	    System.out.println("\nNo result found!");
+	    LOGGER.info("\nNo result found!");
 	} else if (count == 1) {
             return true;
         }
         else{
-	    System.out.println("\nFound " + count + " result!\n");
+	    LOGGER.info("\nFound " + count + " result!\n");
 	    for (String matched : fileSearch.getResult()){
-		System.out.println("Found : " + matched);
+		LOGGER.info("Found : " + matched);
 	    }
 	}
         
@@ -60,7 +62,7 @@ public final class FileSearch {
 	if (directory.isDirectory()) {
 	    search(directory);
 	} else {
-	    System.out.println(directory.getAbsoluteFile() + " is not a directory!");
+	    LOGGER.info(directory.getAbsoluteFile() + " is not a directory!");
 	}
 
   }
@@ -68,7 +70,7 @@ public final class FileSearch {
   private void search(File file) {
 
 	if (file.isDirectory()) {
-	  System.out.println("Searching directory ... " + file.getAbsoluteFile());
+	  LOGGER.info("Searching directory ... " + file.getAbsoluteFile());
 		
             //do you have permission to read this directory?	
 	    if (file.canRead()) {
@@ -84,7 +86,7 @@ public final class FileSearch {
 	    }
 
 	 } else {
-		System.out.println(file.getAbsoluteFile() + "Permission Denied");
+		LOGGER.info(file.getAbsoluteFile() + "Permission Denied");
 	 }
       }
 

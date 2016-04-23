@@ -26,18 +26,19 @@ import static pl.myproject.quiz.util.SampleData.*;
  * @author Mariusz Czarny
  */
 public final class FillSampleData {
-    private static final Logger logger = Logger.getLogger(FillSampleData.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(FillSampleData.class.getName());
 
+    
     public FillSampleData() {
     }
     
     public static Question getRandomQuestionFromPool(List<Question> questionPool) {
         Question randomQuestion = new Question();
         if (questionPool.isEmpty()) {
-            logger.warning("Question Pool is empty.");
+            LOGGER.warning("Question Pool is empty.");
         } else {
             int randomQuestionId = RandomizeValue.getRandomInt(questionPool.size());
-            logger.info("Question id afer randomize " + randomQuestionId);
+            LOGGER.info("Question id afer randomize " + randomQuestionId);
             if ((randomQuestionId > 0) && (randomQuestionId < questionPool.size())) {
                 randomQuestion = questionPool.get(randomQuestionId);
             } 
@@ -56,7 +57,7 @@ public final class FillSampleData {
             Question question = new Question(i, RandomizeValue.getRandomString(QUESTION), populateRandomAnswer(answersNumberPerQuestion));
             questionSet.add(question);
             i = questionSet.size();
-            logger.info("Iteration number in set populate method " + i);
+            LOGGER.info("Iteration number in set populate method " + i);
         }
         return questionSet;
     }
@@ -91,7 +92,7 @@ public final class FillSampleData {
     public static Ranking populateRandomRanking(int rankingId, int numberOfUsers, String description) {
         List<RankingRow> rankingRowList = new ArrayList<>();
         for (int i = 0; i < numberOfUsers; i++) {
-            User user = new User(RandomizeValue.getRandomString(USER_FIRSTNAME), RandomizeValue.getRandomString(USER_SECONDNAME), "sample@email.com");
+            User user = new User(RandomizeValue.getRandomString(USER_FIRSTNAME), RandomizeValue.getRandomString(USER_SECONDNAME), SAMPLE_EMAIL);
             RankingRow rankingRow = new RankingRow(i+1, user, RandomizeValue.getRandomData(), RandomizeValue.getRandomInt(10));
             rankingRowList.add(rankingRow);
         }
@@ -102,7 +103,7 @@ public final class FillSampleData {
      public static List<Ranking> populateRandomRankings(int numberOfRankings, String description) {
         List<Ranking> rankingList = new ArrayList<>();
         for(int i = 0; i < numberOfRankings; i++) {
-            Ranking ranking = populateRandomRanking(i+1, RandomizeValue.getRandomInt(10), "Jakies targi " + i);
+            Ranking ranking = populateRandomRanking(i+1, RandomizeValue.getRandomInt(10), SAMPLE_JOB_FAIR + i);
             rankingList.add(ranking);
         }
         return rankingList;
@@ -110,7 +111,7 @@ public final class FillSampleData {
      
     public static List<Game> populateRandomGame(int numberOfGames) {
         List<Game> gameList = new ArrayList<>();
-        User user = new User(RandomizeValue.getRandomString(USER_FIRSTNAME), RandomizeValue.getRandomString(USER_FIRSTNAME), "sample@email.com");
+        User user = new User(RandomizeValue.getRandomString(USER_FIRSTNAME), RandomizeValue.getRandomString(USER_FIRSTNAME), SAMPLE_EMAIL);
         for (int i = 0; i < numberOfGames; i++) {
             Game game = new Game(i, user);
             gameList.add(game);

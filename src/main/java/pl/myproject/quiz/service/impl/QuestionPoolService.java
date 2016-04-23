@@ -28,14 +28,14 @@ import static pl.myproject.quiz.util.constant.ApplicationValues.DEFAULT_QUESTION
 @Startup
 //@ApplicationScoped
 public class QuestionPoolService implements IQuestionPoolService{
-    private static final Logger LOG = Logger.getLogger(QuestionPoolService.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(QuestionPoolService.class.getName());
     
    @Inject
     private IQuestionDao dao;
 
     @PostConstruct
     public void init() {
-        LOG.info("Question Pool init!");
+        LOGGER.info("Question Pool init!");
     }
     
     @Override
@@ -81,7 +81,7 @@ public class QuestionPoolService implements IQuestionPoolService{
 
     @Override
     public void deleteQuestionFromDB(Question entity) {
-//        dao.delete(entity.getId());
+        throw new UnsupportedOperationException("Not supported yet.");
     }    
 
     @Override

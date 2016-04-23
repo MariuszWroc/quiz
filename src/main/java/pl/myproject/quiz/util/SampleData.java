@@ -14,6 +14,8 @@ public final class SampleData {
     public final static String[] ANSWER;
     public final static String[] USER_FIRSTNAME;
     public final static String[] USER_SECONDNAME;    
+    public final static String SAMPLE_EMAIL = "sample@email.com";
+    public final static String SAMPLE_JOB_FAIR = "Jakies targi ";
     
     static {
         QUESTION = new String[10];

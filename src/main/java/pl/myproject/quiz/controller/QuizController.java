@@ -188,7 +188,6 @@ public class QuizController implements Serializable {
             }
         } else if (questionCounter == 10){
             questionCounter = 0;
-            questionCounter = 0;
             logger.info("last page");
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("result.xhtml");
