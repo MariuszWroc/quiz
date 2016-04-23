@@ -37,7 +37,7 @@ import pl.myproject.quiz.service.impl.QuestionPoolService;
 @ManagedBean(eager=true)
 public class QuizController implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(QuizController.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(QuizController.class.getName());
     private String selectedAnswer;
     private String questionDescription;
     private List<String> questionList;
@@ -62,14 +62,14 @@ public class QuizController implements Serializable {
         questionPool = new ArrayList<>();
         questionSet = new LinkedHashSet<>();
         poolService = new QuestionPoolService();
-        logger.info("questionCounter " + questionCounter);
+        LOGGER.info("questionCounter " + questionCounter);
     }
 
     @PostConstruct
     public void init() {
         questionSet = poolService.getQuestionPool(SIZE);
         questionPool.addAll(questionSet);
-        questionPool.forEach(p -> logger.info(p.toString()));
+        questionPool.forEach(p -> LOGGER.info(p.toString()));
         prepareView();
     }
 
@@ -130,7 +130,7 @@ public class QuizController implements Serializable {
             skip = false;   //reset in case user goes back
             return "confirm";
         } else {
-            logger.info("page nr " + questionCounter);
+            LOGGER.info("page nr " + questionCounter);
             questionCounter++;
             checkPoints();
             prepareView();
@@ -139,12 +139,12 @@ public class QuizController implements Serializable {
     }
 
     public String saveResult() {
-        logger.info("Quiz result saved");
+        LOGGER.info("Quiz result saved");
         return "result?faces-redirect=true";
     }
     
     public void onTimeout(){  
-        logger.info("timer");
+        LOGGER.info("timer");
     }
 
     public Integer getScore() {
@@ -157,7 +157,7 @@ public class QuizController implements Serializable {
             if (record.getDescription() != null) {
                 questionParseList.add(record.getDescription());
             } else {
-                logger.info("quiz.controller.QuizController.parseQuestionsToList() -> there is no question description");
+                LOGGER.info("quiz.controller.QuizController.parseQuestionsToList() -> there is no question description");
             }
         }
 
@@ -170,7 +170,7 @@ public class QuizController implements Serializable {
             if (record.getDescription() != null) {
                 answerParseList.add(record.getDescription());
             } else {
-                logger.info("quiz.controller.QuizController.parseQuestionsToList() -> there is no answer description");
+                LOGGER.info("quiz.controller.QuizController.parseQuestionsToList() -> there is no answer description");
             }
         }
 
@@ -178,7 +178,7 @@ public class QuizController implements Serializable {
     }
 
     private void prepareView() {
-        logger.info("counter is " + questionCounter + ", size is " + SIZE);
+        LOGGER.info("counter is " + questionCounter + ", size is " + SIZE);
         if (questionCounter < SIZE) {
             final Question selectQuestion = questionPool.get(questionCounter);
             if (selectQuestion != null) {
@@ -188,13 +188,13 @@ public class QuizController implements Serializable {
             }
         } else if (questionCounter == 10){
             questionCounter = 0;
-            logger.info("last page");
+            LOGGER.info("last page");
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("result.xhtml");
             } catch (IOException ex) {
                 Logger.getLogger(QuizController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            logger.info("end of quiz ");
+            LOGGER.info("end of quiz ");
         }
 
     }

@@ -11,7 +11,7 @@ import javax.inject.Singleton;
 
 import pl.myproject.quiz.model.Ranking;
 import pl.myproject.quiz.service.IRankingService;
-import pl.myproject.quiz.util.FillSampleData;
+import pl.myproject.quiz.persistence.impl.FillSampleData;
 
 /**
  *

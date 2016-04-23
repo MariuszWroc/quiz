@@ -17,7 +17,7 @@ import pl.myproject.quiz.persistence.IQuestionDao;
 import pl.myproject.quiz.persistence.impl.QuestionDao;
 import pl.myproject.quiz.service.IQuestionService;
 import pl.myproject.quiz.service.impl.QuestionService;
-import pl.myproject.quiz.util.FillSampleData;
+import pl.myproject.quiz.persistence.impl.FillSampleData;
 import static pl.myproject.quiz.util.constant.ApplicationValues.DEFAULT_QUESTION_POOL_SIZE;
 
 /**

@@ -15,7 +15,7 @@ import javax.ejb.Stateless;
 import pl.myproject.quiz.model.Game;
 import pl.myproject.quiz.model.User;
 import pl.myproject.quiz.service.IGameService;
-import pl.myproject.quiz.util.FillSampleData;
+import pl.myproject.quiz.persistence.impl.FillSampleData;
 /**
  *
  * @author Mariusz Czarny

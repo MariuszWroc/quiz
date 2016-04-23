@@ -6,6 +6,7 @@
 package pl.myproject.quiz.controller;
 
 import java.io.Serializable;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -24,6 +25,7 @@ import pl.myproject.quiz.model.ApplicationSetting;
 @Named
 @RequestScoped
 public class SettingController implements Serializable{
+    private static final Logger LOGGER = Logger.getLogger(SettingController.class.getName());
 	private static final long serialVersionUID = 1L;
 	private static final String ACCEPT_CHANGES = "Zmiany zostały";
     @Inject
@@ -34,16 +36,16 @@ public class SettingController implements Serializable{
     
     @PostConstruct
     public void init() {
-        System.out.println(setting.toString());
+        LOGGER.info(setting.toString());
     }
 
     public ApplicationSetting getSetting() {
-        System.out.println(setting.toString());
+        LOGGER.info(setting.toString());
         return setting;
     }
 
     public void setSetting(ApplicationSetting setting) {
-        System.out.println(setting.toString());
+        LOGGER.info(setting.toString());
         this.setting = setting;
     }
 

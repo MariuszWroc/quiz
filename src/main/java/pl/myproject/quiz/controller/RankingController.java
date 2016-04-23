@@ -46,9 +46,7 @@ public class RankingController implements Serializable {
     
     @PostConstruct
     public void init() {
-        this.rankingList = new ArrayList<>(); //rankingService.getRankingList();
-        List<RankingRow> answerList = new ArrayList<>();
-        rankingList.add(new Ranking(1, "ranking", answerList));
+        this.rankingList = rankingService.getRankingList();
     }
 
     public List<Ranking> getRankingList() {

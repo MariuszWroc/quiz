@@ -5,7 +5,7 @@
  */
 package pl.myproject.quiz.persistence.impl;
 
-import javax.ejb.Stateless;
+import javax.inject.Singleton;
 
 import pl.myproject.quiz.model.Question;
 import pl.myproject.quiz.persistence.AbstractDao;
@@ -16,7 +16,7 @@ import static pl.myproject.quiz.util.constant.ApplicationStrings.*;
  *
  * @author Mariusz Czarny
  */
-@Stateless
+@Singleton
 public class QuestionDao extends AbstractDao<Question> implements IQuestionDao{
             
     @Override

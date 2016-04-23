@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.myproject.quiz.util;
+package pl.myproject.quiz.persistence.impl;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,9 +17,10 @@ import pl.myproject.quiz.model.Question;
 import pl.myproject.quiz.model.Ranking;
 import pl.myproject.quiz.model.RankingRow;
 import pl.myproject.quiz.model.User;
+import pl.myproject.quiz.util.RandomizeValue;
 
 import static pl.myproject.quiz.util.constant.ApplicationValues.*;
-import static pl.myproject.quiz.util.SampleData.*;
+import static pl.myproject.quiz.persistence.impl.SampleData.*;
 
 /**
  *

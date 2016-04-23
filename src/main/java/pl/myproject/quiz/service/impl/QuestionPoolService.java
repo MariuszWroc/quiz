@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import pl.myproject.quiz.model.Question;
 import pl.myproject.quiz.persistence.IQuestionDao;
 import pl.myproject.quiz.service.IQuestionPoolService;
-import pl.myproject.quiz.util.FillSampleData;
+import pl.myproject.quiz.persistence.impl.FillSampleData;
 import static pl.myproject.quiz.util.constant.ApplicationValues.DEFAULT_QUESTION_POOL_SIZE;
 
 /**

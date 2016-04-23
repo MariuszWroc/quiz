@@ -8,6 +8,7 @@ package pl.myproject.quiz.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -33,6 +34,8 @@ import pl.myproject.quiz.service.IQuestionPoolService;
 @Named("questionController")
 public class QuestionPoolController implements Serializable {
 	private static final long serialVersionUID = 1L;
+    private static final Logger LOGGER = Logger.getLogger(QuestionPoolController.class.getName());
+        
 	private static final String QUESTION_SELECTED = "Pytanie zaznaczone";
     private static final String QUESTION_UNSELECTED = "Pytanie odznaczone";
     private List<Question> questionList;
@@ -69,17 +72,17 @@ public class QuestionPoolController implements Serializable {
     }
 
     public void buttonDeleteQuestion() {
-        System.out.println("buttonDeleteQuestion");
+        LOGGER.info("buttonDeleteQuestion");
 //        questionService.deleteQuestionFromPool(selectedQuestion);
     }
         
     public void buttonUdateQuestion() {
-        System.out.println("buttonUdateQuestion");
+        LOGGER.info("buttonUdateQuestion");
 //        questionService.addQuestionToPool(selectedQuestion);
     }
             
     public void buttonAddQuestion() {
-        System.out.println("buttonAddQuestion");        
+        LOGGER.info("buttonAddQuestion");        
 //        questionService.addQuestionToPool(selectedQuestion);
     }
 
@@ -92,17 +95,17 @@ public class QuestionPoolController implements Serializable {
     }
     
     public void buttonDeleteAnswer() {
-        System.out.println("buttonDeleteAnswer");        
+        LOGGER.info("buttonDeleteAnswer");        
 //        questionService.deleteQuestionFromPool(selectedAnswer);
     }
         
     public void buttonUdateAnswer() {
-        System.out.println("buttonUdateAnswer");        
+        LOGGER.info("buttonUdateAnswer");        
 //        questionService.addQuestionToPool(selectedAnswer);
     }
             
     public void buttonAddAnswer() {
-        System.out.println("buttonAddAnswer");        
+        LOGGER.info("buttonAddAnswer");        
 //        questionService.addQuestionToPool(selectedAnswer);
     }
     

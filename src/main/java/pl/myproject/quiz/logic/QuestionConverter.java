@@ -18,7 +18,7 @@ import pl.myproject.quiz.model.Question;
  *
  * @author Mariusz Czarny
  */
-@FacesConverter(forClass=Question.class, value = "radioButtonConverter")
+@FacesConverter(forClass=Question.class, value = "questionConverter")
 public final class QuestionConverter implements Converter {
 
     @Override

@@ -13,7 +13,7 @@ import javax.inject.Singleton;
 import pl.myproject.quiz.model.Question;
 import pl.myproject.quiz.service.IQuestionPoolService;
 import pl.myproject.quiz.service.IQuestionService;
-import pl.myproject.quiz.util.FillSampleData;
+import pl.myproject.quiz.persistence.impl.FillSampleData;
 
 /**
  *
