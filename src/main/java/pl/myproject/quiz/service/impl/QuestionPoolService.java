@@ -18,6 +18,7 @@ import pl.myproject.quiz.model.Question;
 import pl.myproject.quiz.persistence.IQuestionDao;
 import pl.myproject.quiz.service.IQuestionPoolService;
 import pl.myproject.quiz.persistence.impl.FillSampleData;
+import pl.myproject.quiz.persistence.impl.QuestionDao;
 import static pl.myproject.quiz.util.constant.ApplicationValues.DEFAULT_QUESTION_POOL_SIZE;
 
 /**
@@ -40,17 +41,17 @@ public class QuestionPoolService implements IQuestionPoolService{
     
     @Override
     public Set<Question> getQuestionPool(int size) {
-        return FillSampleData.populateQuestionsPool(size);
+        return QuestionDao.populateQuestionsPool(size);
     }
 
     @Override
     public List<Question> getQuestionPool() {
-        return FillSampleData.populateQuestions(DEFAULT_QUESTION_POOL_SIZE.getNumber());
+        return QuestionDao.populateQuestions(DEFAULT_QUESTION_POOL_SIZE.getNumber());
     }
     
     @Override
     public Question getRandomQuestionFromPool(List<Question> questionPool) {
-        return FillSampleData.getRandomQuestionFromPool(questionPool);
+        return QuestionDao.getRandomQuestionFromPool(questionPool);
     }
 
     @Override

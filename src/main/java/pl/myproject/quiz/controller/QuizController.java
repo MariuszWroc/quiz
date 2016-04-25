@@ -38,6 +38,7 @@ import pl.myproject.quiz.service.impl.QuestionPoolService;
 public class QuizController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = Logger.getLogger(QuizController.class.getName());
+    private static final int POOL_SIZE = 10;
     private String selectedAnswer;
     private String questionDescription;
     private List<String> questionList;
@@ -46,7 +47,6 @@ public class QuizController implements Serializable {
     private boolean skip;
     private Integer questionCounter;
     private List<Question> questionPool;
-    private static final int SIZE = 10;
     private Set<Question> questionSet;
     private Integer score;
     @Inject
@@ -67,7 +67,7 @@ public class QuizController implements Serializable {
 
     @PostConstruct
     public void init() {
-        questionSet = poolService.getQuestionPool(SIZE);
+        questionSet = poolService.getQuestionPool(POOL_SIZE);
         questionPool.addAll(questionSet);
         questionPool.forEach(p -> LOGGER.info(p.toString()));
         prepareView();
@@ -144,7 +144,7 @@ public class QuizController implements Serializable {
     }
     
     public void onTimeout(){  
-        LOGGER.info("timer");
+        LOGGER.info("time out");
     }
 
     public Integer getScore() {
@@ -178,8 +178,8 @@ public class QuizController implements Serializable {
     }
 
     private void prepareView() {
-        LOGGER.info("counter is " + questionCounter + ", size is " + SIZE);
-        if (questionCounter < SIZE) {
+        LOGGER.info("counter is " + questionCounter + ", size is " + POOL_SIZE);
+        if (questionCounter < POOL_SIZE) {
             final Question selectQuestion = questionPool.get(questionCounter);
             if (selectQuestion != null) {
                 questionList = parseQuestionsToList(questionPool);

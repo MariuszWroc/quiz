@@ -32,15 +32,15 @@
                    function isDoubleClick() {
       // returns true if called twice within 500 milliseconds
    }
-
             </script>
         </h:head>
+
         <h:body>
             <ui:composition template="/template.xhtml">
                 <ui:define name="content">
                     <h:form>
-                        <p:panelGrid columns="2">
-                            <p:panel id="timerPanel" widgetVar="timerPanel" closable="true" toggleable="true">
+                        <p:panelGrid columns="2" styleClass="panelNoBorder">
+                            <p:panel id="timerPanel" widgetVar="timerPanel" closable="true" toggleable="true" styleClass="panelNoBorder">
                                 <pe:timer 
                                     id = "timer"
                                     visible="false"  
@@ -56,13 +56,13 @@
                                     disabled="true"  
                                     value="0"/>
                             </p:panel>
-                            <p:panel id="questionPanel" header="QuestionPanel">
+                            <p:panel id="questionPanel" >
                                 <p:wizard flowListener="#{quizController.onFlowProcess}" showNavBar="false" widgetVar="wizard">
                                     <c:forEach items="#{quizController.questionList}" var="oneQuestion">
                                         <p:tab id="question" >
-                                            <p:panelGrid columns="2">
+                                            <p:panelGrid columns="2" styleClass="panelNoBorder">
 
-                                                <p:panel header="#{quizController.questionDescription}">
+                                                <p:panel header="#{quizController.questionDescription}" >
                                                     <p:messages />
                                                     <h:panelGrid id="quizGrid" columns="2" columnClasses="value" cellpadding="50">
                                                         <ui:repeat value="#{quizController.answerList}" var="selectedAnswer" >

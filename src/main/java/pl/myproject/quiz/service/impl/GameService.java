@@ -16,6 +16,7 @@ import pl.myproject.quiz.model.Game;
 import pl.myproject.quiz.model.User;
 import pl.myproject.quiz.service.IGameService;
 import pl.myproject.quiz.persistence.impl.FillSampleData;
+import pl.myproject.quiz.persistence.impl.GameDao;
 /**
  *
  * @author Mariusz Czarny
@@ -25,7 +26,7 @@ public class GameService implements IGameService{
 
     @Override
     public List<Game> getGameList() {
-        List<Game> gameList = FillSampleData.populateRandomGame(5);
+        List<Game> gameList = GameDao.populateRandomGame(5);
         return gameList;
     }    
 

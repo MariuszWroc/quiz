@@ -18,20 +18,16 @@ import pl.myproject.quiz.model.Ranking;
 import pl.myproject.quiz.model.RankingRow;
 import pl.myproject.quiz.model.User;
 import pl.myproject.quiz.util.RandomizeValue;
-
+import static pl.myproject.quiz.util.SampleData.*;
 import static pl.myproject.quiz.util.constant.ApplicationValues.*;
-import static pl.myproject.quiz.persistence.impl.SampleData.*;
 
 /**
  *
  * @author Mariusz Czarny
  */
+@Deprecated
 public final class FillSampleData {
     private static final Logger LOGGER = Logger.getLogger(FillSampleData.class.getName());
-
-    
-    public FillSampleData() {
-    }
     
     public static Question getRandomQuestionFromPool(List<Question> questionPool) {
         Question randomQuestion = new Question();

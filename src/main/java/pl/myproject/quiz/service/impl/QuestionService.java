@@ -14,6 +14,7 @@ import pl.myproject.quiz.model.Question;
 import pl.myproject.quiz.service.IQuestionPoolService;
 import pl.myproject.quiz.service.IQuestionService;
 import pl.myproject.quiz.persistence.impl.FillSampleData;
+import pl.myproject.quiz.persistence.impl.QuestionDao;
 
 /**
  *
@@ -33,7 +34,7 @@ public class QuestionService implements IQuestionService {
     
     @Override
     public Question getRandomQuestionFromPool() {
-        return FillSampleData.getRandomQuestionFromPool(poolService.getQuestionPool());
+        return QuestionDao.getRandomQuestionFromPool(poolService.getQuestionPool());
     }
 
 }

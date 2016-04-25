@@ -36,7 +36,7 @@ public class Main {
 //        ISettingDao dao = new SettingDao();
 //        dao.add(createQuestion(), ApplicationStrings.DEFAULT_CATALOG.getName(), createQuestion().getId().toString());
 
-        List<Question> questionPool = FillSampleData.populateQuestions(DEFAULT_QUESTION_POOL_SIZE.getNumber());
+        List<Question> questionPool = QuestionDao.populateQuestions(DEFAULT_QUESTION_POOL_SIZE.getNumber());
         ApplicationSetting setting = new ApplicationSetting();
 
         
@@ -44,7 +44,7 @@ public class Main {
 //            dao.add(questionPool.get(0), entity.getId());
 //        }
 //        dao.add(setting);
-        Set<Question> populateQuestionsPool = FillSampleData.populateQuestionsPool(10);
+        Set<Question> populateQuestionsPool = QuestionDao.populateQuestionsPool(10);
                 printCollection(populateQuestionsPool);
     }
 

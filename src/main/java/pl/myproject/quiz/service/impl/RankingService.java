@@ -12,6 +12,7 @@ import javax.inject.Singleton;
 import pl.myproject.quiz.model.Ranking;
 import pl.myproject.quiz.service.IRankingService;
 import pl.myproject.quiz.persistence.impl.FillSampleData;
+import pl.myproject.quiz.persistence.impl.RankingDao;
 
 /**
  *
@@ -22,7 +23,7 @@ public class RankingService implements IRankingService{
 
     @Override
     public List<Ranking> getRankingList() {
-        List<Ranking> rankingList = FillSampleData.populateRandomRankings(3, DEFAULT_DESCRIPTION);
+        List<Ranking> rankingList = RankingDao.populateRandomRankings(3, DEFAULT_DESCRIPTION);
         return rankingList;
     }
 
