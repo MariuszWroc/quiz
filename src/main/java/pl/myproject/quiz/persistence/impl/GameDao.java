@@ -18,7 +18,7 @@ import pl.myproject.quiz.util.RandomizeValue;
 public class GameDao implements IGameDao{
     private static final Logger LOGGER = Logger.getLogger(GameDao.class.getName());
     
-    public static List<Game> populateRandomGame(int numberOfGames) {
+    public List<Game> populateRandomGame(int numberOfGames) {
         List<Game> gameList = new ArrayList<>();
         User user = new User(RandomizeValue.getRandomString(USER_FIRSTNAME), RandomizeValue.getRandomString(USER_FIRSTNAME), SAMPLE_EMAIL);
         for (int i = 0; i < numberOfGames; i++) {

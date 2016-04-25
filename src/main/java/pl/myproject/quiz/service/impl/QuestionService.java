@@ -11,10 +11,9 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import pl.myproject.quiz.model.Question;
+import pl.myproject.quiz.persistence.IQuestionDao;
 import pl.myproject.quiz.service.IQuestionPoolService;
 import pl.myproject.quiz.service.IQuestionService;
-import pl.myproject.quiz.persistence.impl.FillSampleData;
-import pl.myproject.quiz.persistence.impl.QuestionDao;
 
 /**
  *
@@ -26,6 +25,8 @@ public class QuestionService implements IQuestionService {
 
     @Inject
     private IQuestionPoolService poolService;
+    @Inject
+    private IQuestionDao dao;
 
     @PostConstruct
     public void init() {
@@ -34,7 +35,7 @@ public class QuestionService implements IQuestionService {
     
     @Override
     public Question getRandomQuestionFromPool() {
-        return QuestionDao.getRandomQuestionFromPool(poolService.getQuestionPool());
+        return dao.getRandomQuestionFromPool(poolService.getQuestionPool());
     }
 
 }

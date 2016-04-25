@@ -38,7 +38,7 @@ public class QuestionDao extends AbstractDao<Question> implements IQuestionDao{
         return pathfile;
     }
     
-    public static Question getRandomQuestionFromPool(List<Question> questionPool) {
+    public Question getRandomQuestionFromPool(List<Question> questionPool) {
         Question randomQuestion = new Question();
         if (questionPool.isEmpty()) {
             LOGGER.warning("Question Pool is empty.");
@@ -52,11 +52,11 @@ public class QuestionDao extends AbstractDao<Question> implements IQuestionDao{
         return randomQuestion;
     }
 
-    public static Set<Question> populateQuestionsPool(int questionPoolSize) {
+    public Set<Question> populateQuestionsPool(int questionPoolSize) {
         return populateQuestionsPool(questionPoolSize, DEFAULT_ANSWER_POOL_SIZE.getNumber());
     }
 
-    public static Set<Question> populateQuestionsPool(int questionPoolSize, int answersNumberPerQuestion) {
+    public Set<Question> populateQuestionsPool(int questionPoolSize, int answersNumberPerQuestion) {
         Set<Question> questionSet = new HashSet<>();
         int i = 1;
         while (i != questionPoolSize) {
@@ -68,12 +68,12 @@ public class QuestionDao extends AbstractDao<Question> implements IQuestionDao{
         return questionSet;
     }
     
-    public static List<Question> populateQuestions(ApplicationSetting settings) {
+    public List<Question> populateQuestions(ApplicationSetting settings) {
         int questionPoolSize = settings.getQuestionPoolSize();
         return populateQuestions(questionPoolSize);
     }
     
-    public static List<Question> populateQuestions(int questionPoolSize, int answersNumberPerQuestion) {
+    public List<Question> populateQuestions(int questionPoolSize, int answersNumberPerQuestion) {
         List<Question> questionSet = new ArrayList<>();
         for (int i = 0; i < questionPoolSize; i++) {
             Question question = new Question(i+1, RandomizeValue.getRandomString(QUESTION), populateRandomAnswer(answersNumberPerQuestion));
@@ -82,11 +82,11 @@ public class QuestionDao extends AbstractDao<Question> implements IQuestionDao{
         return questionSet;
     }
 
-    public static List<Question> populateQuestions(int questionPoolSize) {
+    public List<Question> populateQuestions(int questionPoolSize) {
         return populateQuestions(questionPoolSize, DEFAULT_ANSWER_POOL_SIZE.getNumber());
     }
     
-    public static List<Answer> populateRandomAnswer(int answersNumberPerQuestion) {
+    public List<Answer> populateRandomAnswer(int answersNumberPerQuestion) {
         List<Answer> questionList = new ArrayList<>();
         for (int i = 0; i < answersNumberPerQuestion; i++) {
             Answer answer = new Answer(i+1, RandomizeValue.getRandomString(ANSWER), Boolean.TRUE);

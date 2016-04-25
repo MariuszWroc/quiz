@@ -11,22 +11,25 @@ import static pl.myproject.quiz.util.constant.ApplicationValues.DEFAULT_TIME_FOR
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import pl.myproject.quiz.model.Game;
 import pl.myproject.quiz.model.User;
+import pl.myproject.quiz.persistence.IGameDao;
 import pl.myproject.quiz.service.IGameService;
-import pl.myproject.quiz.persistence.impl.FillSampleData;
-import pl.myproject.quiz.persistence.impl.GameDao;
 /**
  *
  * @author Mariusz Czarny
  */
 @Stateless
 public class GameService implements IGameService{
+	
+	@Inject
+	IGameDao dao;
 
     @Override
     public List<Game> getGameList() {
-        List<Game> gameList = GameDao.populateRandomGame(5);
+        List<Game> gameList = dao.populateRandomGame(5);
         return gameList;
     }    
 

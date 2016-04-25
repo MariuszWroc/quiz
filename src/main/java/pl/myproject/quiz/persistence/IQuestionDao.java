@@ -5,8 +5,13 @@
  */
 package pl.myproject.quiz.persistence;
 
+import java.util.List;
+import java.util.Set;
+
 import javax.ejb.Local;
 
+import pl.myproject.quiz.model.Answer;
+import pl.myproject.quiz.model.ApplicationSetting;
 import pl.myproject.quiz.model.Question;
 
 /**
@@ -15,5 +20,11 @@ import pl.myproject.quiz.model.Question;
  */
 @Local
 public interface IQuestionDao extends IAbstractDao<Question>{
-    
+	public Question getRandomQuestionFromPool(List<Question> questionPool);
+    public Set<Question> populateQuestionsPool(int questionPoolSize);
+    public Set<Question> populateQuestionsPool(int questionPoolSize, int answersNumberPerQuestion);
+    public List<Question> populateQuestions(ApplicationSetting settings);
+    public List<Question> populateQuestions(int questionPoolSize, int answersNumberPerQuestion);
+    public List<Question> populateQuestions(int questionPoolSize);
+    public List<Answer> populateRandomAnswer(int answersNumberPerQuestion);    
 }

@@ -20,7 +20,6 @@ import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 
 import pl.myproject.quiz.model.Ranking;
-import pl.myproject.quiz.model.RankingRow;
 import pl.myproject.quiz.service.IRankingService;
 import pl.myproject.quiz.service.impl.RankingService;
 

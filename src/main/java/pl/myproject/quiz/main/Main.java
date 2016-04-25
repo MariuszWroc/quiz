@@ -5,6 +5,8 @@
  */
 package pl.myproject.quiz.main;
 
+import static pl.myproject.quiz.util.constant.ApplicationValues.DEFAULT_QUESTION_POOL_SIZE;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -17,8 +19,6 @@ import pl.myproject.quiz.persistence.IQuestionDao;
 import pl.myproject.quiz.persistence.impl.QuestionDao;
 import pl.myproject.quiz.service.IQuestionService;
 import pl.myproject.quiz.service.impl.QuestionService;
-import pl.myproject.quiz.persistence.impl.FillSampleData;
-import static pl.myproject.quiz.util.constant.ApplicationValues.DEFAULT_QUESTION_POOL_SIZE;
 
 /**
  *
@@ -36,7 +36,7 @@ public class Main {
 //        ISettingDao dao = new SettingDao();
 //        dao.add(createQuestion(), ApplicationStrings.DEFAULT_CATALOG.getName(), createQuestion().getId().toString());
 
-        List<Question> questionPool = QuestionDao.populateQuestions(DEFAULT_QUESTION_POOL_SIZE.getNumber());
+        List<Question> questionPool = dao.populateQuestions(DEFAULT_QUESTION_POOL_SIZE.getNumber());
         ApplicationSetting setting = new ApplicationSetting();
 
         
@@ -44,7 +44,7 @@ public class Main {
 //            dao.add(questionPool.get(0), entity.getId());
 //        }
 //        dao.add(setting);
-        Set<Question> populateQuestionsPool = QuestionDao.populateQuestionsPool(10);
+        Set<Question> populateQuestionsPool = dao.populateQuestionsPool(10);
                 printCollection(populateQuestionsPool);
     }
 
