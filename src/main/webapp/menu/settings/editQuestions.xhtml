@@ -12,11 +12,10 @@
         <h:body>
             <ui:composition template="/template.xhtml">
                 <ui:define name="content">
-                    <!--<h:form id="form">-->   
                     <p:growl id="growl" showDetail="true"/>   
                     <p:panel id="masterPanel" style="margin-bottom:20px ">
-                        <p:dataTable id="masterTable" var="selectedQuestion" value="#{questionController.questionList}" paginator="true" rows="10" 
-                                     emptyMessage="brak pytań w puli"  rowKey="#{selectedQuestion.id}" selection="#{questionController.selectedQuestion}" 
+                        <p:dataTable id="masterTable" var="oneQuestion" value="#{questionController.questionList}" paginator="true" rows="10" 
+                                     emptyMessage="brak pytań w puli"  rowKey="#{oneQuestion.id}" selection="#{questionController.selectedQuestion}" 
                                      selectionMode="single"  editable="true" >  
 
                             <p:ajax event="rowSelect" listener="#{questionController.onRowSelect}"   
@@ -25,19 +24,19 @@
                             <p:ajax event="rowEdit" listener="#{questionController.onRowEdit}" update=":form:growl" />
                             <p:ajax event="rowEditCancel" listener="#{questionController.onRowCancel}" update=":form:growl" />
 
-
                             <p:column headerText="Pytania">
                                 <p:cellEditor>
                                     <f:facet name="output">
-                                        <h:outputText value="#{selectedQuestion.description}" />
-                                        <f:facet name="input"><p:inputText id="modelInput" value="#{selectedQuestion.description}" style="width:100%"/></f:facet>
+                                        <h:outputText value="#{oneQuestion.description}" />
+                                        <f:facet name="input">
+                                        	<p:inputText id="modelInput" value="#{oneQuestion.description}" style="width:100%"/>
+                                        </f:facet>
                                     </f:facet>
                                 </p:cellEditor>
                             </p:column>
                             <p:column style="width:32px">
                                 <p:rowEditor />
                             </p:column>
-
                         </p:dataTable>
                         <p:commandButton value="Usuń" id="deleteQuestion" update="growl" actionListener="#{questionController.buttonDeleteQuestion}"/>
                         <p:commandButton value="Aktualizuj" id="updateQuestion" update="growl" actionListener="#{questionController.buttonUdateQuestion}"/>

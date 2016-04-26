@@ -10,7 +10,6 @@ import java.util.Set;
 
 import javax.ejb.Local;
 
-import pl.myproject.quiz.model.Answer;
 import pl.myproject.quiz.model.ApplicationSetting;
 import pl.myproject.quiz.model.Question;
 
@@ -26,5 +25,4 @@ public interface IQuestionDao extends IAbstractDao<Question>{
     public List<Question> populateQuestions(ApplicationSetting settings);
     public List<Question> populateQuestions(int questionPoolSize, int answersNumberPerQuestion);
     public List<Question> populateQuestions(int questionPoolSize);
-    public List<Answer> populateRandomAnswer(int answersNumberPerQuestion);    
 }

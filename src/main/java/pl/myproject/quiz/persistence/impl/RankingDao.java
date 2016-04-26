@@ -21,6 +21,7 @@ import pl.myproject.quiz.util.RandomizeValue;
 public class RankingDao implements IRankingDao{
     private static final Logger LOGGER = Logger.getLogger(RankingDao.class.getName());
     
+    @Override
     public Ranking populateRandomRanking(int rankingId, int numberOfUsers, String description) {
         List<RankingRow> rankingRowList = new ArrayList<>();
         for (int i = 0; i < numberOfUsers; i++) {
@@ -32,6 +33,7 @@ public class RankingDao implements IRankingDao{
         return ranking;
     }
 
+    @Override
      public List<Ranking> populateRandomRankings(int numberOfRankings, String description) {
         List<Ranking> rankingList = new ArrayList<>();
         for(int i = 0; i < numberOfRankings; i++) {

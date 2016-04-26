@@ -13,9 +13,12 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 
@@ -41,6 +44,7 @@ public class RankingController implements Serializable {
     public RankingController() {
         rankingService = new RankingService();
         rankingList = new ArrayList<>();
+        selectedRanking = new Ranking();
     }
     
     @PostConstruct
@@ -63,14 +67,6 @@ public class RankingController implements Serializable {
     public void setSelectedRanking(Ranking selectedRanking) {
         this.selectedRanking = selectedRanking;
     }
-
-    public IRankingService getRankingService() {
-        return rankingService;
-    }
-
-    public void setRankingService(IRankingService rankingService) {
-        this.rankingService = rankingService;
-    }
     
     public void onRowSelect(SelectEvent event) {
         FacesMessage msg = new FacesMessage(RANKING_SELECTED, ((Ranking) event.getObject()).getDescription());
@@ -80,5 +76,25 @@ public class RankingController implements Serializable {
     public void onRowUnselect(UnselectEvent event) {
         FacesMessage msg = new FacesMessage(RANKING_UNSELECTED, ((Ranking) event.getObject()).getDescription());
         FacesContext.getCurrentInstance().addMessage(null, msg);
-    }    
+    }
+    
+    public void onRowEdit(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Row Edited", ((Ranking) event.getObject()).getId().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+     
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", ((Ranking) event.getObject()).getId().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public void onCellEdit(CellEditEvent event) {
+        Object oldValue = event.getOldValue();
+        Object newValue = event.getNewValue();
+         
+        if(newValue != null && !newValue.equals(oldValue)) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
 }

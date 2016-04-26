@@ -12,26 +12,27 @@
         <h:body>
             <ui:composition template="/template.xhtml">
                 <ui:define name="content">
-                    <!--<p:growl id="growl" showDetail="true"/>-->   
+                    <p:growl id="growl" showDetail="true"/>  
                     <p:panel id="masterPanel" style="margin-bottom:20px ">
-                        <p:dataTable id="masterTable" var="ranking" value="#{rankingController.rankingList}" paginator="true" rows="3" emptyMessage="brak pytań w puli"  
-                                     rowKey="#{ranking.id}" selection="#{rankingController.selectedRanking}" selectionMode="single"
-                                     editable="true">  
+                        <p:dataTable id="masterTable" var="oneRanking" value="#{rankingController.rankingList}" paginator="true" rows="3" 
+                        			 emptyMessage="brak pytań w puli" rowKey="#{oneRanking.id}" selection="#{rankingController.selectedRanking}" 
+                        			 selectionMode="single" editable="true">  
 
                             <p:ajax event="rowSelect" listener="#{rankingController.onRowSelect}"   
                                     update=":form:detailTable" />  
-                            <p:ajax event="rowUnselect" listener="#{rankingController.onRowUnselect}" update=":form:detailTable"/>  
+                            <p:ajax event="rowUnselect" listener="#{rankingController.onRowUnselect}" update=":form:detailTable"/>
+                            <p:ajax event="rowEdit" listener="#{questionController.onRowEdit}" update=":form:growl" />
+                            <p:ajax event="rowEditCancel" listener="#{questionController.onRowCancel}" update=":form:growl" />  
 
-                            <p:column headerText="Ranking (opis)" sortBy="#{rankingRow.description}"> 
-<!--                                <p:cellEditor>
+                            <p:column headerText="Ranking (opis)" >
+                            	<p:cellEditor> 
                                     <f:facet name="output">
-                                        <h:outputText value="#{ranking.description}" />
+                                    	<h:outputText value="#{oneRanking.description}" />
+                                    	<f:facet name="input">
+                                        	<p:inputText id="modelInput" value="#{oneRanking.description}" style="width:100%"/>
+                                        </f:facet>
                                     </f:facet>
-                                    <f:facet name="input">
-                                        <p:inputText id="modelInput" value="#{ranking.description}" style="width:100%"/>
-                                    </f:facet>
-                                </p:cellEditor>-->
-                                #{ranking.description}
+                            	</p:cellEditor>
                             </p:column>
                             <p:column style="width:32px">
                                 <p:rowEditor />

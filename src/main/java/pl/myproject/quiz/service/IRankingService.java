@@ -18,7 +18,7 @@ import pl.myproject.quiz.model.Ranking;
 @Local
 public interface IRankingService {
     public static final String DEFAULT_DESCRIPTION = "jakis opis";
-
+    public static final int DEFAULT_NUMBER_OF_EVENTS = 100;
     /**
      *
      * @return

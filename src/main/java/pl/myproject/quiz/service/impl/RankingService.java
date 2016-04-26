@@ -25,7 +25,7 @@ public class RankingService implements IRankingService{
 
     @Override
     public List<Ranking> getRankingList() {
-        List<Ranking> rankingList = dao.populateRandomRankings(3, DEFAULT_DESCRIPTION);
+        List<Ranking> rankingList = dao.populateRandomRankings(DEFAULT_NUMBER_OF_EVENTS, DEFAULT_DESCRIPTION);
         return rankingList;
     }
 

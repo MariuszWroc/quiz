@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
+import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -30,12 +31,11 @@ import pl.myproject.quiz.service.IQuestionPoolService;
  *
  * @author Mariusz Czarny
  */
-@ApplicationScoped
+@RequestScoped
 @Named("questionController")
 public class QuestionPoolController implements Serializable {
 	private static final long serialVersionUID = 1L;
-    private static final Logger LOGGER = Logger.getLogger(QuestionPoolController.class.getName());
-        
+    private static final Logger LOGGER = Logger.getLogger(QuestionPoolController.class.getName());        
 	private static final String QUESTION_SELECTED = "Pytanie zaznaczone";
     private static final String QUESTION_UNSELECTED = "Pytanie odznaczone";
     private List<Question> questionList;
@@ -71,42 +71,12 @@ public class QuestionPoolController implements Serializable {
         this.selectedQuestion = selectedQuestion;
     }
 
-    public void buttonDeleteQuestion() {
-        LOGGER.info("buttonDeleteQuestion");
-//        questionService.deleteQuestionFromPool(selectedQuestion);
-    }
-        
-    public void buttonUdateQuestion() {
-        LOGGER.info("buttonUdateQuestion");
-//        questionService.addQuestionToPool(selectedQuestion);
-    }
-            
-    public void buttonAddQuestion() {
-        LOGGER.info("buttonAddQuestion");        
-//        questionService.addQuestionToPool(selectedQuestion);
-    }
-
     public Answer getSelectedAnswer() {
         return selectedAnswer;
     }
 
     public void setSelectedAnswer(Answer selectedAnswer) {
         this.selectedAnswer = selectedAnswer;
-    }
-    
-    public void buttonDeleteAnswer() {
-        LOGGER.info("buttonDeleteAnswer");        
-//        questionService.deleteQuestionFromPool(selectedAnswer);
-    }
-        
-    public void buttonUdateAnswer() {
-        LOGGER.info("buttonUdateAnswer");        
-//        questionService.addQuestionToPool(selectedAnswer);
-    }
-            
-    public void buttonAddAnswer() {
-        LOGGER.info("buttonAddAnswer");        
-//        questionService.addQuestionToPool(selectedAnswer);
     }
     
     public void onRowSelect(SelectEvent event) {
@@ -120,7 +90,7 @@ public class QuestionPoolController implements Serializable {
     }
     
     public void onRowEdit(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Car Edited", ((Question) event.getObject()).getId().toString());
+        FacesMessage msg = new FacesMessage("Row Edited", ((Question) event.getObject()).getId().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
      
