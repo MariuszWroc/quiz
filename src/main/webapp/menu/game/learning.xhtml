@@ -1,90 +1,27 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui" 
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:pe="http://primefaces.org/ui/extensions">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
-    <f:view contentType="text/html">        
-        <h:head>
-            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-            <script name="jquery/jquery.js" library="primefaces"></script>
-            <script>
-                function next() {
-//                    if (PF('wizard').)
-                    PF('wizard').next();
-//                    resetTimer();
-                }
-                function stopTimer() {
-                    PF('knob').setValue(0);
-                }
-                function resetWizard() {
-                    PF('wizard').loadStep(PF('wizard').cfg.steps[0], true);
-                }
-                window.sync = function (t) {
-                    PF('knob').setValue(t.current);
-                }
-                function redirectToResult() {
-                    window.location="result.xhtml";
-                }
-                   function isDoubleClick() {
-      // returns true if called twice within 500 milliseconds
-   }
-            </script>
-        </h:head>
+<f:view contentType="text/html">
+	<h:head>
+		<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+	</h:head>
 
-        <h:body>
-            <ui:composition template="/template.xhtml">
-                <ui:define name="content">
-                    <h:form>
-                        <p:panelGrid columns="2" styleClass="panelNoBorder">
-                            <p:panel id="timerPanel" widgetVar="timerPanel" closable="true" toggleable="true" styleClass="panelNoBorder">
-                                <pe:timer 
-                                    id = "timer"
-                                    visible="false"  
-                                    ontimerstep="sync(intervalData)"  
-                                    oncomplete="redirectToResult();"
-                                    singleRun="true"
-                                    timeout="100"
-                                    />  
-                                <pe:knob
-                                    min="0"  
-                                    max="100"  
-                                    widgetVar="knob"  
-                                    disabled="true"  
-                                    value="0"/>
-                            </p:panel>
-                            <p:panel id="questionPanel" >
-                                <p:wizard flowListener="#{quizController.onFlowProcess}" showNavBar="false" widgetVar="wizard">
-                                    <c:forEach items="#{quizController.questionList}" var="oneQuestion">
-                                        <p:tab id="question" >
-                                            <p:panelGrid columns="2" styleClass="panelNoBorder">
-
-                                                <p:panel header="#{quizController.questionDescription}" >
-                                                    <p:messages />
-                                                    <h:panelGrid id="quizGrid" columns="2" columnClasses="value" cellpadding="50">
-                                                        <ui:repeat value="#{quizController.answerList}" var="selectedAnswer" >
-                                                            <p:commandButton id="answerRadioButton" value="#{selectedAnswer}" onclick="next();"/>                                                           
-                                                        </ui:repeat>
-                                                    </h:panelGrid>
-                                                </p:panel>
-                                            </p:panelGrid>
-                                        </p:tab>
-                                    </c:forEach>
-                                    <p:tab>
-                                        <!--<p:remoteCommand name="increment" update=":form"  onstart="redirectToResult();"/>-->
-                                        
-                                        <!--<p:ajax event="closePanel" id="closePanel" onstart="return !isDoubleClick();" />-->
-                                        <p:commandButton value="Check result" ajax="false" onclick="" update="@form"/>                                
-                                </p:tab>
-                            </p:wizard>
-                        </p:panel>
-                    </p:panelGrid>
-                </h:form>
-            </ui:define>
-            </ui:composition>
-        </h:body>
-    </f:view>
+	<h:body>
+		<ui:composition template="/template.xhtml">
+			<ui:define name="content">
+				<h:form>
+					<p:panel id="learningPanel">
+						<p:commandButton value="Graj" icon="ui-icon-check" action="quiz?faces-redirect=true" ajax="false"/>
+					</p:panel>
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>
 </html>

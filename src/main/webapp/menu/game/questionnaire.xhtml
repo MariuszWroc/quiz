@@ -17,20 +17,20 @@
                         <p:growl id="msgs" showDetail="true" />
                         <h:panelGrid columns="2" cellpadding="5">
                             <p:outputLabel value="Imię" for="firstname"/>
-                            <p:autoComplete id="firstname" required="true" requiredMessage="Please enter your first name." >
+                            <p:autoComplete id="firstname" value="#{quizController.firstname}" required="true" requiredMessage="Please enter your first name." >
                                 <f:validateLength minimum="2" />
                             </p:autoComplete>
                             <p:outputLabel value="Nazwisko" for="lastname"/>
-                            <p:autoComplete id="lastname" required="true" requiredMessage="Please enter your last name.">
+                            <p:autoComplete id="lastname" value="#{quizController.lastname}" required="true" requiredMessage="Please enter your last name.">
                                 <f:validateLength minimum="2" />
                             </p:autoComplete>
                             <p:outputLabel value="E-mail" for="email" />
-                            <p:autoComplete id="email" required="true" requiredMessage="Please enter your email address." >
+                            <p:autoComplete id="email" value="#{quizController.email}" required="true" requiredMessage="Please enter your email address." >
                                 <f:validateLength minimum="5" />
                                 <f:validateRegex
                                     pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                             </p:autoComplete>
-                            <p:commandButton value="Dalej" icon="ui-icon-check" action="quiz?faces-redirect=true" ajax="false"/>
+                            <p:commandButton value="Dalej" icon="ui-icon-check" action="#{gameController.saveUser}" ajax="false"/>
                         </h:panelGrid>
                     </h:form>
                 </ui:define>

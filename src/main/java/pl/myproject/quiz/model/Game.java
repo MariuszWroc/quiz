@@ -1,6 +1,7 @@
 package pl.myproject.quiz.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -46,6 +47,14 @@ public class Game implements Serializable {
     public Game(Integer id, User user) {
         this.id = id;
         this.user = user;
+    }
+    
+    public Game(User user, Integer timeForAnswer) {
+    	this.id = 1;
+        this.user = user;
+        this.score = 0;
+        this.timeForAnswer = timeForAnswer;
+        this.questionList = new ArrayList<Question>();
     }
 
     public Integer getId() {

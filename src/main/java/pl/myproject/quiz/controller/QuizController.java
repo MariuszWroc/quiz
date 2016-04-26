@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -25,7 +26,9 @@ import javax.inject.Inject;
 import org.primefaces.event.FlowEvent;
 
 import pl.myproject.quiz.model.Answer;
+import pl.myproject.quiz.model.Game;
 import pl.myproject.quiz.model.Question;
+import pl.myproject.quiz.model.User;
 import pl.myproject.quiz.service.IQuestionPoolService;
 import pl.myproject.quiz.service.impl.QuestionPoolService;
 
@@ -41,6 +44,11 @@ public class QuizController implements Serializable {
     private static final int POOL_SIZE = 10;
     private String selectedAnswer;
     private String questionDescription;
+	private Game game;
+	private User user;
+    private String firstname;
+    private String lastname;
+    private String email;
     private List<String> questionList;
     private List<String> answerList;
     private Map<String, Boolean> answerMap;
@@ -62,6 +70,8 @@ public class QuizController implements Serializable {
         questionPool = new ArrayList<>();
         questionSet = new LinkedHashSet<>();
         poolService = new QuestionPoolService();
+		user = new User();
+		game = new Game();
         LOGGER.info("questionCounter " + questionCounter);
     }
 
@@ -124,20 +134,72 @@ public class QuizController implements Serializable {
     public Integer getQuestionCounter() {
         return questionCounter;
     }
+
+    private void checkPoints(boolean answerCorrect) {
+    	if (answerCorrect) {
+    		score++;
+    	}
+    }
     
+    public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	   
     public String onFlowProcess(FlowEvent event) {
         if (skip) {
             skip = false;   //reset in case user goes back
             return "confirm";
         } else {
-            LOGGER.info("page nr " + questionCounter);
+            LOGGER.info("page nr " + questionCounter + ", answerMap.containsKey(selectedAnswer) " + answerMap.containsKey(selectedAnswer));
             questionCounter++;
-            checkPoints();
+            checkPoints(answerMap.containsKey(selectedAnswer));
+            LOGGER.info("score " + score);
             prepareView();
             return event.getNewStep();
         }
     }
-
+    
+    public String checkResult() {
+        LOGGER.info("Check result saved");
+        return "index?faces-redirect=true";
+    }
+    
     public String saveResult() {
         LOGGER.info("Quiz result saved");
         return "result?faces-redirect=true";
@@ -149,6 +211,11 @@ public class QuizController implements Serializable {
 
     public Integer getScore() {
         return score;
+    }
+    
+    public String saveUser() {
+        LOGGER.info("User saved");
+        return "quiz?faces-redirect=true";
     }
     
     private List<String> parseQuestionsToList(List<Question> questionsToParse) {
@@ -170,11 +237,24 @@ public class QuizController implements Serializable {
             if (record.getDescription() != null) {
                 answerParseList.add(record.getDescription());
             } else {
-                LOGGER.info("quiz.controller.QuizController.parseQuestionsToList() -> there is no answer description");
+                LOGGER.info("quiz.controller.QuizController.parseAnswersToList() -> there is no answer description");
             }
         }
 
         return answerParseList;
+    }
+    
+    private Map<String, Boolean> parseAnswersToMap(List<Answer> answerToParse) {
+    	Map<String, Boolean> answerMap = new LinkedHashMap<>();
+        for (Answer record : answerToParse) {
+            if (record.getDescription() != null) {
+            	answerMap.put(record.getDescription(), record.isCorrect());
+            } else {
+                LOGGER.info("quiz.controller.QuizController.parseAnswersToMap() -> there is no answer description");
+            }
+        }
+
+        return answerMap;
     }
 
     private void prepareView() {
@@ -185,6 +265,7 @@ public class QuizController implements Serializable {
                 questionList = parseQuestionsToList(questionPool);
                 answerList = parseAnswersToList(selectQuestion.getAnswerList());
                 questionDescription = selectQuestion.getDescription();
+                answerMap = parseAnswersToMap(selectQuestion.getAnswerList());
             }
         } else if (questionCounter == 10){
             questionCounter = 0;
@@ -198,8 +279,5 @@ public class QuizController implements Serializable {
         }
 
     }
-
-    private void checkPoints() {
-        score++;
-    }
+	
 }

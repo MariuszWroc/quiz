@@ -30,7 +30,7 @@ import pl.myproject.quiz.service.IQuestionPoolService;
 public class QuestionPoolService implements IQuestionPoolService{
     private static final Logger LOGGER = Logger.getLogger(QuestionPoolService.class.getName());
     
-   @Inject
+    @Inject
     private IQuestionDao dao;
 
     @PostConstruct

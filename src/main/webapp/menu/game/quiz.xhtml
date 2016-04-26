@@ -3,33 +3,78 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:pe="http://primefaces.org/ui/extensions">
 
     <f:view contentType="text/html">        
         <h:head>
             <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <script name="jquery/jquery.js" library="primefaces"></script>
+            <script>
+                function next() {
+                    PF('wizard').next();
+                }
+                function stopTimer() {
+                    PF('knob').setValue(0);
+                }
+                function resetWizard() {
+                    PF('wizard').loadStep(PF('wizard').cfg.steps[0], true);
+                }
+                window.sync = function (t) {
+                    PF('knob').setValue(t.current);
+                }
+                function redirectToResult() {
+                    window.location="result.xhtml";
+                }
+            </script>
         </h:head>
+
         <h:body>
             <ui:composition template="/template.xhtml">
                 <ui:define name="content">
                     <h:form>
-                        <p:growl id="settingGrowl" sticky="true" showDetail="true"/>
-                        <p:panel id="questionPanel" header="QuestionPanel">
-                            <p:messages />
-                            <h:panelGrid id="counterGrid" columns="2" cellpadding="5">
-                                <h:outputText value="Question left: " />
-                                <h:outputText id="output" value="#{quizController.questionCounter}" />
-                            </h:panelGrid>
-                            <h:panelGrid id="quizGrid" columns="1" columnClasses="label, value" cellpadding="5">
-                                <p:outputLabel for="answer" value="#{quizController.questionDescription}" />
-                                <p:selectOneRadio id="answer"  value="#{quizController.selectedAnswer}" layout="grid" columns="1" required="true" requiredMessage="Choose an answer" >
-                                    <f:selectItems id="answerRadioButton" value="#{quizController.answerList}" var="entry" itemLabel="#{answer}" itemValue="#{answer}" />
-                                </p:selectOneRadio>
-                            </h:panelGrid>
+                        <p:panelGrid columns="2" styleClass="panelNoBorder">
+                            <p:panel id="timerPanel" widgetVar="timerPanel" closable="true" toggleable="true" styleClass="panelNoBorder">
+                                <pe:timer 
+                                    id = "timer"
+                                    visible="false"  
+                                    ontimerstep="sync(intervalData)"  
+                                    oncomplete="redirectToResult();"
+                                    singleRun="true"
+                                    timeout="100"
+                                    />  
+                                <pe:knob
+                                    min="0"  
+                                    max="100"  
+                                    widgetVar="knob"  
+                                    disabled="true"  
+                                    value="0"/>
+                            </p:panel>
+                            <p:panel id="questionPanel" >
+                                <p:wizard flowListener="#{quizController.onFlowProcess}" showNavBar="false" widgetVar="wizard">
+                                    <c:forEach items="#{quizController.questionList}" var="oneQuestion">
+                                        <p:tab id="question" >
+                                            <p:panelGrid columns="2" styleClass="panelNoBorder">
+                                                <p:panel header="#{quizController.questionDescription}" >
+                                                    <p:messages />
+                                                    <h:panelGrid id="quizGrid" columns="2" columnClasses="value" cellpadding="50">
+                                                        <ui:repeat value="#{quizController.answerList}" var="selectedAnswer" >
+                                                            <p:commandButton id="answerRadioButton" value="#{selectedAnswer}" onclick="next();"/>                                                           
+                                                        </ui:repeat>
+                                                    </h:panelGrid>
+                                                </p:panel>
+                                            </p:panelGrid>
+                                        </p:tab>
+                                    </c:forEach>
+                                    <p:tab>
+                                        <p:commandButton value="Check result" ajax="false" onclick="" update="@form"/>                                
+                                    </p:tab>
+                            </p:wizard>
                         </p:panel>
-                        <p:commandButton value="Next" ajax="false" action="#{quizController.nextQuestion()}" update="settingGrowl" process="@this"/>
-                    </h:form>
-                </ui:define>
+                    </p:panelGrid>
+                </h:form>
+            </ui:define>
             </ui:composition>
         </h:body>
     </f:view>
