@@ -14,6 +14,10 @@ import pl.myproject.quiz.model.User;
 import pl.myproject.quiz.persistence.IGameDao;
 import pl.myproject.quiz.util.RandomizeValue;
 
+/**
+*
+* @author Mariusz Czarny
+*/
 @Stateless
 public class GameDao implements IGameDao{
     private static final Logger LOGGER = Logger.getLogger(GameDao.class.getName());

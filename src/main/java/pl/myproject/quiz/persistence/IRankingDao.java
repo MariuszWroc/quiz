@@ -6,6 +6,10 @@ import javax.ejb.Local;
 
 import pl.myproject.quiz.model.Ranking;
 
+/**
+*
+* @author Mariusz Czarny
+*/
 @Local
 public interface IRankingDao {
 	public List<Ranking> populateRandomRankings(int numberOfRankings, String description);

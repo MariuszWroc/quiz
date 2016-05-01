@@ -17,6 +17,10 @@ import pl.myproject.quiz.model.User;
 import pl.myproject.quiz.persistence.IRankingDao;
 import pl.myproject.quiz.util.RandomizeValue;
 
+/**
+*
+* @author Mariusz Czarny
+*/
 @Stateless
 public class RankingDao implements IRankingDao{
     private static final Logger LOGGER = Logger.getLogger(RankingDao.class.getName());

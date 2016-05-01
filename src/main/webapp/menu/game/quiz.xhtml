@@ -59,8 +59,8 @@
                                                 <p:panel header="#{quizController.questionDescription}" >
                                                     <p:messages />
                                                     <h:panelGrid id="quizGrid" columns="2" columnClasses="value" cellpadding="50">
-                                                        <ui:repeat value="#{quizController.answerList}" var="selectedAnswer" >
-                                                            <p:commandButton id="answerRadioButton" value="#{selectedAnswer}" onclick="next();"/>                                                           
+                                                        <ui:repeat value="#{quizController.answerList}" var="oneAnswer" >
+                                                            <p:commandButton id="answerRadioButton" value="#{oneAnswer}" onclick="next();"/>                                                           
                                                         </ui:repeat>
                                                     </h:panelGrid>
                                                 </p:panel>

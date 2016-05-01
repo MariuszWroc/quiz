@@ -11,6 +11,10 @@ import pl.myproject.quiz.model.Answer;
 import pl.myproject.quiz.persistence.IAnswerDao;
 import pl.myproject.quiz.util.RandomizeValue;
 
+/**
+*
+* @author Mariusz Czarny
+*/
 @Stateless
 public class AnswerDao implements IAnswerDao {
     public List<Answer> populateRandomAnswer(int answersNumberPerQuestion) {
