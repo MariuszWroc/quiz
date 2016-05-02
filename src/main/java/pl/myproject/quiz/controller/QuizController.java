@@ -26,8 +26,12 @@ import org.primefaces.event.FlowEvent;
 
 import pl.myproject.quiz.model.Answer;
 import pl.myproject.quiz.model.Question;
+import pl.myproject.quiz.model.User;
+import pl.myproject.quiz.service.IGameService;
 import pl.myproject.quiz.service.IQuestionPoolService;
+import pl.myproject.quiz.service.IUserService;
 import pl.myproject.quiz.service.impl.QuestionPoolService;
+import pl.myproject.quiz.service.impl.UserService;
 
 /**
  *
@@ -54,6 +58,10 @@ public class QuizController implements Serializable {
     private Integer score;
     @Inject
     private IQuestionPoolService poolService;
+    @Inject
+    private IUserService userService;
+    @Inject
+    private IGameService gameService;
 
     public QuizController() {
         questionDescription = "";
@@ -65,6 +73,7 @@ public class QuizController implements Serializable {
         questionPool = new ArrayList<>();
         questionSet = new LinkedHashSet<>();
         poolService = new QuestionPoolService();
+        userService = new UserService();
         LOGGER.info("questionCounter " + questionCounter);
     }
 
@@ -170,14 +179,15 @@ public class QuizController implements Serializable {
         }
     }
     
-    public String checkResult() {
-        LOGGER.info("Check result saved");
-        return "index?faces-redirect=true";
-    }
-    
     public String saveResult() {
-        LOGGER.info("Quiz result saved");
-        return "result?faces-redirect=true";
+    	User user = userService.getUser(getUserId());
+        if(user != null) {
+        	gameService.saveGameResult(user, getScore());
+        	LOGGER.info("Quiz result saved");
+        } else {
+        	LOGGER.warning("Quiz result is NOT saved. User propably not exist");
+        }
+        return "index?faces-redirect=true";
     }
     
     public void onTimeout(){  
@@ -187,11 +197,29 @@ public class QuizController implements Serializable {
     public Integer getScore() {
         Integer score = (Integer) FacesContext.getCurrentInstance().getExternalContext().getFlash()
 			.get("score");
-        return score;
+        if (score == null) {
+        	return 0;
+        } else  {
+        	return score;
+        }
+    }
+    
+    public Integer getUserId() {
+        Integer userId = (Integer) FacesContext.getCurrentInstance().getExternalContext().getFlash()
+			.get("userId");
+        if (userId == null) {
+        	LOGGER.warning("Id from flash scope is null");
+        } 
+        
+		return userId;
     }
     
     public String saveUser() {
         LOGGER.info("User saved");
+        Integer userId = userService.addUserAndReturnId(firstname, lastname, email);
+        FacesContext.getCurrentInstance().getExternalContext().getFlash()
+			.put("userId", userId);
+        userService.getUserList().forEach(p -> LOGGER.info("User is " + p.toString()));
         return "quiz?faces-redirect=true";
     }
     

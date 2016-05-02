@@ -26,5 +26,5 @@ public interface IGameService {
      */
     List<Game> getGameList();
 
-    Game createNewGame(User user);
+    Game saveGameResult(User user, Integer score);
 }

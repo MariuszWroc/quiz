@@ -5,8 +5,6 @@
  */
 package pl.myproject.quiz.service.impl;
 
-import static pl.myproject.quiz.util.constant.ApplicationValues.DEFAULT_TIME_FOR_ANSWER;
-
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -33,8 +31,8 @@ public class GameService implements IGameService{
     }    
 
     @Override
-    public Game createNewGame(User user) {
-        Game game = new Game(user, DEFAULT_TIME_FOR_ANSWER.getNumber());
+    public Game saveGameResult(User user, Integer score) {
+        Game game = new Game(user, score);
         return game;
     }
 }

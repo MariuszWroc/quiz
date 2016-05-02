@@ -44,6 +44,12 @@ public class Game implements Serializable {
         this.timeForAnswer = timeForAnswer;
     }
     
+    public Game(Integer id, User user, Integer score) {
+        this.id = id;
+        this.user = user;
+        this.score = score;
+    }
+    
     public Game(Integer id, User user) {
         this.id = id;
         this.user = user;
