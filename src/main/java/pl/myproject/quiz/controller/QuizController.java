@@ -20,6 +20,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
 import org.primefaces.event.FlowEvent;
@@ -159,6 +160,31 @@ public class QuizController implements Serializable {
 		this.email = email;
 	}
 	   
+    public void onTimeout(){  
+        LOGGER.info("time out");
+    }
+
+    public Integer getScore() {
+        Integer score = (Integer) FacesContext.getCurrentInstance().getExternalContext().getFlash()
+			.get("score");
+        LOGGER.info("Sprawdz nazwisko " + (Integer) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("score"));
+        if (score == null) {
+        	return 0;
+        } else  {
+        	return score;
+        }
+    }
+    
+    public Integer getUserId() {
+        Integer userId = (Integer) FacesContext.getCurrentInstance().getExternalContext().getFlash()
+			.get("userId");
+        if (userId == null) {
+        	LOGGER.warning("Id from flash scope is null");
+        } 
+        
+		return userId;
+    }
+    
     public String onFlowProcess(FlowEvent event) {
         if (skip) {
             skip = false;   //reset in case user goes back
@@ -179,47 +205,33 @@ public class QuizController implements Serializable {
         }
     }
     
-    public String saveResult() {
-    	User user = userService.getUser(getUserId());
-        if(user != null) {
-        	gameService.saveGameResult(user, getScore());
-        	LOGGER.info("Quiz result saved");
-        } else {
-        	LOGGER.warning("Quiz result is NOT saved. User propably not exist");
-        }
-        return "index?faces-redirect=true";
-    }
-    
-    public void onTimeout(){  
-        LOGGER.info("time out");
-    }
-
-    public Integer getScore() {
-        Integer score = (Integer) FacesContext.getCurrentInstance().getExternalContext().getFlash()
-			.get("score");
-        if (score == null) {
-        	return 0;
-        } else  {
-        	return score;
-        }
-    }
-    
-    public Integer getUserId() {
-        Integer userId = (Integer) FacesContext.getCurrentInstance().getExternalContext().getFlash()
-			.get("userId");
-        if (userId == null) {
-        	LOGGER.warning("Id from flash scope is null");
-        } 
-        
-		return userId;
+    public void saveResult(ActionEvent event) {
+        LOGGER.info(" with score " + getScore());
+    	String firstname = (String) FacesContext.getCurrentInstance().getExternalContext().getFlash()
+		.get("firstname");
+    	String lastname = (String) FacesContext.getCurrentInstance().getExternalContext().getFlash()
+		.get("lastname");
+    	String email = (String) FacesContext.getCurrentInstance().getExternalContext().getFlash()
+		.get("email");
+    	User user = new User(firstname, lastname, email);
+        gameService.saveGameResult(user, getScore());
+        LOGGER.info("Quiz result saved " + user.toString() + " with score " + getScore());
     }
     
     public String saveUser() {
-        LOGGER.info("User saved");
-        Integer userId = userService.addUserAndReturnId(firstname, lastname, email);
+        ;
+//        Integer userId = userService.addUserAndReturnId(firstname, lastname, email);
+//        FacesContext.getCurrentInstance().getExternalContext().getFlash()
+//			.put("userId", userId);
         FacesContext.getCurrentInstance().getExternalContext().getFlash()
-			.put("userId", userId);
-        userService.getUserList().forEach(p -> LOGGER.info("User is " + p.toString()));
+			.put("firstname", firstname);
+        FacesContext.getCurrentInstance().getExternalContext().getFlash()
+			.put("lastname", lastname);
+        FacesContext.getCurrentInstance().getExternalContext().getFlash()
+			.put("email", email);
+
+//        userService.getUserList().forEach(p -> LOGGER.info("User is " + p.toString()));
+        LOGGER.info("User saved " + (String) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("email"));
         return "quiz?faces-redirect=true";
     }
     
