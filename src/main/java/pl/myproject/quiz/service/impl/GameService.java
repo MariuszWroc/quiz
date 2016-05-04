@@ -32,7 +32,8 @@ public class GameService implements IGameService{
 
     @Override
     public Game saveGameResult(User user, Integer score) {
-        Game game = new Game(user, score);
+        Game game = new Game(user, score);    
+//        dao.add(game);
         return game;
     }
 }

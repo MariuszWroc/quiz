@@ -17,29 +17,28 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.primefaces.event.FlowEvent;
 
 import pl.myproject.quiz.model.Answer;
+import pl.myproject.quiz.model.Game;
 import pl.myproject.quiz.model.Question;
 import pl.myproject.quiz.model.User;
 import pl.myproject.quiz.service.IGameService;
 import pl.myproject.quiz.service.IQuestionPoolService;
-import pl.myproject.quiz.service.IUserService;
 import pl.myproject.quiz.service.impl.QuestionPoolService;
-import pl.myproject.quiz.service.impl.UserService;
 
 /**
  *
  * @author Mariusz Czarny
  */
-@ViewScoped
-@ManagedBean(eager=true)
+@SessionScoped
+@Named
 public class QuizController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = Logger.getLogger(QuizController.class.getName());
@@ -60,8 +59,6 @@ public class QuizController implements Serializable {
     @Inject
     private IQuestionPoolService poolService;
     @Inject
-    private IUserService userService;
-    @Inject
     private IGameService gameService;
 
     public QuizController() {
@@ -74,8 +71,7 @@ public class QuizController implements Serializable {
         questionPool = new ArrayList<>();
         questionSet = new LinkedHashSet<>();
         poolService = new QuestionPoolService();
-        userService = new UserService();
-        LOGGER.info("questionCounter " + questionCounter);
+        LOGGER.info("quizController created ");
     }
 
     @PostConstruct
@@ -137,7 +133,7 @@ public class QuizController implements Serializable {
     }
 
 	public String getFirstname() {
-		return firstname;
+			return firstname;
 	}
 
 	public void setFirstname(String firstname) {
@@ -145,7 +141,7 @@ public class QuizController implements Serializable {
 	}
 
 	public String getLastname() {
-		return lastname;
+			return lastname;
 	}
 
 	public void setLastname(String lastname) {
@@ -165,24 +161,7 @@ public class QuizController implements Serializable {
     }
 
     public Integer getScore() {
-        Integer score = (Integer) FacesContext.getCurrentInstance().getExternalContext().getFlash()
-			.get("score");
-        LOGGER.info("Sprawdz nazwisko " + (Integer) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("score"));
-        if (score == null) {
-        	return 0;
-        } else  {
         	return score;
-        }
-    }
-    
-    public Integer getUserId() {
-        Integer userId = (Integer) FacesContext.getCurrentInstance().getExternalContext().getFlash()
-			.get("userId");
-        if (userId == null) {
-        	LOGGER.warning("Id from flash scope is null");
-        } 
-        
-		return userId;
     }
     
     public String onFlowProcess(FlowEvent event) {
@@ -205,34 +184,14 @@ public class QuizController implements Serializable {
         }
     }
     
-    public void saveResult(ActionEvent event) {
-        LOGGER.info(" with score " + getScore());
-    	String firstname = (String) FacesContext.getCurrentInstance().getExternalContext().getFlash()
-		.get("firstname");
-    	String lastname = (String) FacesContext.getCurrentInstance().getExternalContext().getFlash()
-		.get("lastname");
-    	String email = (String) FacesContext.getCurrentInstance().getExternalContext().getFlash()
-		.get("email");
-    	User user = new User(firstname, lastname, email);
-        gameService.saveGameResult(user, getScore());
-        LOGGER.info("Quiz result saved " + user.toString() + " with score " + getScore());
-    }
-    
-    public String saveUser() {
-        ;
-//        Integer userId = userService.addUserAndReturnId(firstname, lastname, email);
-//        FacesContext.getCurrentInstance().getExternalContext().getFlash()
-//			.put("userId", userId);
-        FacesContext.getCurrentInstance().getExternalContext().getFlash()
-			.put("firstname", firstname);
-        FacesContext.getCurrentInstance().getExternalContext().getFlash()
-			.put("lastname", lastname);
-        FacesContext.getCurrentInstance().getExternalContext().getFlash()
-			.put("email", email);
-
-//        userService.getUserList().forEach(p -> LOGGER.info("User is " + p.toString()));
-        LOGGER.info("User saved " + (String) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("email"));
-        return "quiz?faces-redirect=true";
+    public String saveResult() {
+        User user = new User(firstname, lastname, email);
+        gameService.saveGameResult(user, score);
+        LOGGER.info("Quiz result saved " + user.toString() + " with score " + score);
+        List<Game> list = gameService.getGameList();
+        list.forEach(p -> LOGGER.info(p.toString()));
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "learning?faces-redirect=true";
     }
     
     private List<String> parseQuestionsToList(List<Question> questionsToParse) {
@@ -294,8 +253,6 @@ public class QuizController implements Serializable {
         } else if (questionCounter == 10){
             questionCounter = 0;
             LOGGER.info("last page");
-            FacesContext.getCurrentInstance().getExternalContext().getFlash()
-				.put("score", score);
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("result.xhtml");
             } catch (IOException ex) {
@@ -306,4 +263,5 @@ public class QuizController implements Serializable {
 
     }
 	
+    
 }

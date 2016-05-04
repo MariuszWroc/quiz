@@ -73,7 +73,7 @@ public class GameController implements Serializable {
 	
     public String saveUser() {
         LOGGER.info("User saved");
-        return "quiz?faces-redirect=true";
+        return "quiz?faces-redirect=true?includeViewParams=true";
     }
 	
 }
