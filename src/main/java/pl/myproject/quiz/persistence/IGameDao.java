@@ -5,7 +5,6 @@ import java.util.List;
 import javax.ejb.Local;
 
 import pl.myproject.quiz.model.Game;
-import pl.myproject.quiz.model.Question;
 
 /**
 *

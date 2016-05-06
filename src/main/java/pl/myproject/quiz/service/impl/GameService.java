@@ -5,8 +5,10 @@
  */
 package pl.myproject.quiz.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 
 import pl.myproject.quiz.model.Game;
@@ -20,6 +22,11 @@ import pl.myproject.quiz.service.IGameService;
 public class GameService implements IGameService{
 	private List<Game> gameList;
 
+	@PostConstruct
+	public void init() {
+		gameList = new ArrayList<Game>();
+	}
+	
     @Override
     public List<Game> getGameList() {
         return gameList;
