@@ -11,7 +11,7 @@ import pl.myproject.quiz.model.Ranking;
 * @author Mariusz Czarny
 */
 @Local
-public interface IRankingDao {
+public interface IRankingDao extends IAbstractDao<Ranking>{
 	public List<Ranking> populateRandomRankings(int numberOfRankings, String description);
 	public Ranking populateRandomRanking(int rankingId, int numberOfUsers, String description);
 }

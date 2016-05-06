@@ -2,8 +2,6 @@ package pl.myproject.quiz.persistence.impl;
 
 import static pl.myproject.quiz.util.SampleData.SAMPLE_EMAIL;
 import static pl.myproject.quiz.util.SampleData.USER_FIRSTNAME;
-import static pl.myproject.quiz.util.constant.ApplicationStrings.CATALOG_RESULT;
-import static pl.myproject.quiz.util.constant.ApplicationStrings.DEFAULT_PATH;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +25,7 @@ public class GameDao extends AbstractDao<Game> implements IGameDao{
     
     @Override
     public String choosePathForFile() {
-        String pathfile = DEFAULT_PATH.getName().concat(CATALOG_RESULT.getName());
+        String pathfile = "";
 
         return pathfile;
     }

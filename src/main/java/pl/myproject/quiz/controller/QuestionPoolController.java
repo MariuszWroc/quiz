@@ -8,14 +8,13 @@ package pl.myproject.quiz.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
@@ -30,11 +29,10 @@ import pl.myproject.quiz.service.IQuestionPoolService;
  *
  * @author Mariusz Czarny
  */
-@RequestScoped
-@Named("questionController")
+@ViewScoped
+@ManagedBean(name = "questionController")
 public class QuestionPoolController implements Serializable {
 	private static final long serialVersionUID = 1L;
-    private static final Logger LOGGER = Logger.getLogger(QuestionPoolController.class.getName());        
 	private static final String QUESTION_SELECTED = "Pytanie zaznaczone";
     private static final String QUESTION_UNSELECTED = "Pytanie odznaczone";
     private List<Question> questionList;

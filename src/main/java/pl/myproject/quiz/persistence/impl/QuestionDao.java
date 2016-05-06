@@ -7,7 +7,7 @@ package pl.myproject.quiz.persistence.impl;
 
 import static pl.myproject.quiz.util.SampleData.QUESTION;
 import static pl.myproject.quiz.util.constant.ApplicationStrings.CATALOG_QUESTION;
-import static pl.myproject.quiz.util.constant.ApplicationStrings.DEFAULT_PATH;
+import static pl.myproject.quiz.util.constant.ApplicationStrings.DEFAULT_PATH_LINUX;
 import static pl.myproject.quiz.util.constant.ApplicationValues.DEFAULT_ANSWER_POOL_SIZE;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class QuestionDao extends AbstractDao<Question> implements IQuestionDao{
     
     @Override
     public String choosePathForFile() {
-        String pathfile = DEFAULT_PATH.getName().concat(CATALOG_QUESTION.getName());
+        String pathfile = DEFAULT_PATH_LINUX.getName().concat(CATALOG_QUESTION.getName());
 
         return pathfile;
     }

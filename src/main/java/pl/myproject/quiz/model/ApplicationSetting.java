@@ -7,7 +7,7 @@ package pl.myproject.quiz.model;
 
 import java.io.Serializable;
 
-import javax.inject.Singleton;
+import javax.enterprise.context.ApplicationScoped;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import static pl.myproject.quiz.util.constant.ApplicationValues.*;
@@ -18,7 +18,7 @@ import static pl.myproject.quiz.util.constant.ApplicationValues.*;
  */
 
 @XmlRootElement
-@Singleton
+@ApplicationScoped
 public class ApplicationSetting implements Serializable{
     private static final long serialVersionUID = 1L;
 //    private final String id = "Global";    

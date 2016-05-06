@@ -8,30 +8,33 @@ package pl.myproject.quiz.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author Mariusz Czarny
  */
+@XmlRootElement
 public class Ranking implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer id;
     private String place;
     private String description;
-    private List<RankingRow> rankingList;
+    private List<Game> gameList;
     
     public Ranking() {}
 
-    public Ranking(Integer id, String place, String description, List<RankingRow> rankingList) {
+    public Ranking(Integer id, String place, String description, List<Game> gameList) {
         this.id = id;
         this.place = place;
         this.description = description;
-        this.rankingList = rankingList;
+        this.gameList = gameList;
     }
 
-    public Ranking(Integer id, String description, List<RankingRow> rankingList) {
+    public Ranking(Integer id, String description, List<Game> gameList) {
         this.id = id;
         this.description = description;
-        this.rankingList = rankingList;
+        this.gameList = gameList;
     }
 
     public Integer getId() {
@@ -58,17 +61,17 @@ public class Ranking implements Serializable{
         this.description = description;
     }
 
-    public List<RankingRow> getRankingList() {
-        return rankingList;
+    public List<Game> getGameList() {
+        return gameList;
     }
 
-    public void setRankingList(List<RankingRow> rankingList) {
-        this.rankingList = rankingList;
+    public void setGameList(List<Game> gameList) {
+        this.gameList = gameList;
     }
 
     @Override
     public String toString() {
-        return "Ranking{" + "id=" + id + ", place=" + place + ", description=" + description + ", rankingList=" + rankingList + '}';
+        return "Ranking{" + "id=" + id + ", place=" + place + ", description=" + description + ", gameList=" + gameList + '}';
     }
     
 }

@@ -2,6 +2,7 @@ package pl.myproject.quiz.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,6 +18,7 @@ public class Game implements Serializable {
 	private Integer id;
     private User user;
     private List<Question> questionList;
+    private Date date;
     private Integer timeForAnswer;
     private Integer score;
 
@@ -37,10 +39,11 @@ public class Game implements Serializable {
         this.score = score;
     }
     
-    public Game(Integer id, User user, Integer score, Integer timeForAnswer) {
+    public Game(Integer id, User user, Integer score, Date date, Integer timeForAnswer) {
         this.id = id;
         this.user = user;
         this.score = score;
+        this.date = date;
         this.timeForAnswer = timeForAnswer;
     }
     
@@ -102,6 +105,14 @@ public class Game implements Serializable {
     public void setScore(Integer score) {
         this.score = score;
     }
+    
+    public Date getDate() {
+		return date;
+	}
+    
+    public void setDate(Date date) {
+		this.date = date;
+	}
     
     @Override
     public String toString() {

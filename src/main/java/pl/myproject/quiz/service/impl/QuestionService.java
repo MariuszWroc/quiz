@@ -8,7 +8,7 @@ package pl.myproject.quiz.service.impl;
 import javax.annotation.PostConstruct;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import javax.inject.Singleton;
+import javax.ejb.Singleton;
 
 import pl.myproject.quiz.model.Question;
 import pl.myproject.quiz.persistence.IQuestionDao;

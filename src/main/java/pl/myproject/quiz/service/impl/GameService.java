@@ -7,33 +7,28 @@ package pl.myproject.quiz.service.impl;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import javax.ejb.Singleton;
 
 import pl.myproject.quiz.model.Game;
 import pl.myproject.quiz.model.User;
-import pl.myproject.quiz.persistence.IGameDao;
 import pl.myproject.quiz.service.IGameService;
 /**
  *
  * @author Mariusz Czarny
  */
-@Stateless
+@Singleton
 public class GameService implements IGameService{
-	
-	@Inject
-	IGameDao dao;
+	private List<Game> gameList;
 
     @Override
     public List<Game> getGameList() {
-        List<Game> gameList = dao.populateRandomGame(5);
         return gameList;
     }    
 
     @Override
     public Game saveGameResult(User user, Integer score) {
         Game game = new Game(user, score);    
-//        dao.add(game);
+        gameList.add(game);
         return game;
     }
 }

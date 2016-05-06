@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
@@ -29,8 +29,8 @@ import pl.myproject.quiz.service.impl.RankingService;
  *
  * @author Mariusz Czarny
  */
-@RequestScoped
-@Named
+@ViewScoped
+@ManagedBean(name = "rankingController")
 public class RankingController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final String RANKING_SELECTED = "Pytanie zaznaczone";

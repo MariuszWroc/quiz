@@ -28,5 +28,5 @@ public interface IRankingService {
     /**
      *
      */
-    void addRankingList();
+	void addRankingList(Ranking ranking);
 }

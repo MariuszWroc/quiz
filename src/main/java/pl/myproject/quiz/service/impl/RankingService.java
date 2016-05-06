@@ -8,7 +8,7 @@ package pl.myproject.quiz.service.impl;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
+import javax.ejb.Singleton;
 
 import pl.myproject.quiz.model.Ranking;
 import pl.myproject.quiz.persistence.IRankingDao;
@@ -25,13 +25,14 @@ public class RankingService implements IRankingService{
 
     @Override
     public List<Ranking> getRankingList() {
+    	//TODO: Should be read from catalog
         List<Ranking> rankingList = dao.populateRandomRankings(DEFAULT_NUMBER_OF_EVENTS, DEFAULT_DESCRIPTION);
         return rankingList;
     }
 
     @Override
-    public void addRankingList() {
-        
+    public void addRankingList(Ranking entity) {
+    	dao.add(entity);
     }    
 
 }

@@ -12,6 +12,7 @@ import java.util.Date;
  *
  * @author Mariusz Czarny
  */
+@Deprecated
 public class RankingRow implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer id;

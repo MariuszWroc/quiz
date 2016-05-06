@@ -4,6 +4,8 @@ import static pl.myproject.quiz.util.SampleData.SAMPLE_EMAIL;
 import static pl.myproject.quiz.util.SampleData.SAMPLE_JOB_FAIR;
 import static pl.myproject.quiz.util.SampleData.USER_FIRSTNAME;
 import static pl.myproject.quiz.util.SampleData.USER_SECONDNAME;
+import static pl.myproject.quiz.util.constant.ApplicationStrings.CATALOG_RANKING;
+import static pl.myproject.quiz.util.constant.ApplicationStrings.DEFAULT_PATH_LINUX;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +13,10 @@ import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 
+import pl.myproject.quiz.model.Game;
 import pl.myproject.quiz.model.Ranking;
-import pl.myproject.quiz.model.RankingRow;
 import pl.myproject.quiz.model.User;
+import pl.myproject.quiz.persistence.AbstractDao;
 import pl.myproject.quiz.persistence.IRankingDao;
 import pl.myproject.quiz.util.RandomizeValue;
 
@@ -22,18 +25,18 @@ import pl.myproject.quiz.util.RandomizeValue;
 * @author Mariusz Czarny
 */
 @Stateless
-public class RankingDao implements IRankingDao{
+public class RankingDao extends AbstractDao<Ranking> implements IRankingDao{
     private static final Logger LOGGER = Logger.getLogger(RankingDao.class.getName());
     
     @Override
     public Ranking populateRandomRanking(int rankingId, int numberOfUsers, String description) {
-        List<RankingRow> rankingRowList = new ArrayList<>();
+        List<Game> gameList = new ArrayList<>();
         for (int i = 0; i < numberOfUsers; i++) {
             User user = new User(RandomizeValue.getRandomString(USER_FIRSTNAME), RandomizeValue.getRandomString(USER_SECONDNAME), SAMPLE_EMAIL);
-            RankingRow rankingRow = new RankingRow(i+1, user, RandomizeValue.getRandomData(), RandomizeValue.getRandomInt(10));
-            rankingRowList.add(rankingRow);
+            Game game = new Game(i+1, user, RandomizeValue.getRandomInt(10), RandomizeValue.getRandomData(), RandomizeValue.getRandomInt(10));
+            gameList.add(game);
         }
-        Ranking ranking = new Ranking(rankingId, description, rankingRowList);
+        Ranking ranking = new Ranking(rankingId, description, gameList);
         return ranking;
     }
 
@@ -46,4 +49,11 @@ public class RankingDao implements IRankingDao{
         }
         return rankingList;
     }
+
+	@Override
+	public String choosePathForFile() {
+        String pathfile = DEFAULT_PATH_LINUX.getName().concat(CATALOG_RANKING.getName());
+
+        return pathfile;
+	}
 }
