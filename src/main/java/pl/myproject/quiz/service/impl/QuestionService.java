@@ -5,6 +5,8 @@
  */
 package pl.myproject.quiz.service.impl;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.Startup;
 import javax.inject.Inject;
@@ -24,18 +26,28 @@ import pl.myproject.quiz.service.IQuestionService;
 public class QuestionService implements IQuestionService {
 
     @Inject
-    private IQuestionPoolService poolService;
-    @Inject
     private IQuestionDao dao;
+    
+    @Override
+    public void loadQuestionInDB() {
+        dao.findAll();
+    }
 
-    @PostConstruct
-    public void init() {
-        poolService = new QuestionPoolService();
+    @Override
+    public void saveQuestionInDB(Question entity) {
+        dao.add(entity);
     }
     
     @Override
-    public Question getRandomQuestionFromPool() {
-        return dao.getRandomQuestionFromPool(poolService.getQuestionPool());
+    public void saveAllQuestionInDB(List<Question> entityList) {
+        for (Question entity : entityList) {
+            dao.add(entity);
+        }
     }
+
+    @Override
+    public void deleteQuestionFromDB(Question entity) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    } 
 
 }

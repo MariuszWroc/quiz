@@ -8,6 +8,7 @@ package pl.myproject.quiz.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -24,6 +25,9 @@ import org.primefaces.event.UnselectEvent;
 import pl.myproject.quiz.model.Answer;
 import pl.myproject.quiz.model.Question;
 import pl.myproject.quiz.service.IQuestionPoolService;
+
+import static pl.myproject.quiz.util.constant.ApplicationValues.DEFAULT_QUIZ_POOL_SIZE;
+
 
 /**
  *
@@ -49,7 +53,8 @@ public class QuestionPoolController implements Serializable {
     
     @PostConstruct
     public void init() {
-        questionList = questionService.getQuestionPool();
+       Set<Question> questionPoolSet = questionService.getQuestionPool(DEFAULT_QUIZ_POOL_SIZE.getNumber());
+       questionList.addAll(questionPoolSet);
     }
 
     public List<Question> getQuestionList() {

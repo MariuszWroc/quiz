@@ -25,14 +25,7 @@
                             <p:ajax event="rowEditCancel" listener="#{questionController.onRowCancel}" update=":form:growl" />
 
                             <p:column headerText="Pytania">
-                                <p:cellEditor>
-                                    <f:facet name="output">
                                         <h:outputText value="#{oneQuestion.description}" />
-                                        <f:facet name="input">
-                                        	<p:inputText id="modelInput" value="#{oneQuestion.description}" style="width:100%"/>
-                                        </f:facet>
-                                    </f:facet>
-                                </p:cellEditor>
                             </p:column>
                             <p:column style="width:32px">
                                 <p:rowEditor />
@@ -46,7 +39,7 @@
                         <p:dataTable id="detailTable" var="answer" value="#{questionController.selectedQuestion.answerList}" paginator="false" rows="4" emptyMessage="brak odpowiedzi"
                                      rowKey="#{answer.id}" selection="#{questionController.selectedAnswer}" selectionMode="single">   
                             <p:column headerText="Odpowiedzi">  
-                                #{answer.description}  
+                                <h:outputText value="#{answer.description}"  />
                             </p:column>  
                         </p:dataTable> 
                         <p:commandButton value="Usuń" id="deleteAnswer" update="growl" actionListener="#{questionController.buttonDeleteAnswer}"/>

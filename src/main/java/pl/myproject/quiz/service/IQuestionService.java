@@ -5,6 +5,8 @@
  */
 package pl.myproject.quiz.service;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import pl.myproject.quiz.model.Question;
@@ -20,5 +22,11 @@ public interface IQuestionService {
      *
      * @return
      */
-    Question getRandomQuestionFromPool();
+	void deleteQuestionFromDB(Question entity);
+
+	void saveAllQuestionInDB(List<Question> entityList);
+
+	void saveQuestionInDB(Question entity);
+
+	void loadQuestionInDB();
 }

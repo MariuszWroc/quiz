@@ -38,8 +38,8 @@ public class RankingService implements IRankingService{
     @Override
     public List<Ranking> getRankingList() {
     	//TODO: Should be read from catalog
-    	List<Game> gameList = gameService.getGameList();
-    	rankingList.get(0).setGameList(gameList);
+    	List<Ranking> rankingList = dao.populateRandomRankings(DEFAULT_NUMBER_OF_EVENTS, DEFAULT_DESCRIPTION);
+    	
         return rankingList;
     }
 

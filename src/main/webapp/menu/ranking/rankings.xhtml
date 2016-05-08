@@ -25,22 +25,12 @@
                             <p:ajax event="rowEditCancel" listener="#{questionController.onRowCancel}" update=":form:growl" />  
 
                             <p:column headerText="Ranking (opis)" >
-                            	<p:cellEditor> 
-                                    <f:facet name="output">
                                     	<h:outputText value="#{oneRanking.description}" />
-                                    	<f:facet name="input">
-                                        	<p:inputText id="modelInput" value="#{oneRanking.description}" style="width:100%"/>
-                                        </f:facet>
-                                    </f:facet>
-                            	</p:cellEditor>
-                            </p:column>
-                            <p:column style="width:32px">
-                                <p:rowEditor />
                             </p:column>
                         </p:dataTable>  
                     </p:panel>
                     <p:panel id="detailPanel" style="margin-bottom:20px ">
-                        <p:dataTable id="detailTable" var="rankingRow" rowKey="#{user.id}" value="#{rankingController.selectedRanking.rankingList}" paginator="true" rows="10" emptyMessage="brak odpowiedzi">   
+                        <p:dataTable id="detailTable" var="rankingRow" rowKey="#{user.id}" value="#{rankingController.selectedRanking.gameList}" paginator="true" rows="10" emptyMessage="brak odpowiedzi">   
 
                             <p:column headerText="Imię" sortBy="#{rankingRow.user.firstname}">  
                                 #{rankingRow.user.firstname}  

@@ -15,7 +15,11 @@
                 <ui:define name="content">
                     <h:form>
                         <p:panel id="resultPanel" header="Informacje">
-                            <p:link outcome="kontakt/wsparcie" value="mariusz.czarny@ey.com"/>
+                            <h:outputLink value="mailto:mariusz.czarny@ey.com">
+							    <f:param name="subject" value="Help with application quiz 2016" />
+							    <f:param name="body" value="Problems with application" />
+							    <h:outputText value="send an e-mail" />
+							</h:outputLink>
                         </p:panel>
                     </h:form>
                 </ui:define>

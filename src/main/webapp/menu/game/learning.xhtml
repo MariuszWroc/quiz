@@ -17,7 +17,7 @@
 			<ui:define name="content">
 				<h:form>
 					<p:panel id="learningPanel">
-						<p:commandButton value="Graj" icon="ui-icon-check" action="quiz?faces-redirect=true" ajax="false"/>
+						<p:commandButton value="Graj" icon="ui-icon-check" action="#{userController.goToQuiz}" ajax="false"/>
 					</p:panel>
 				</h:form>
 			</ui:define>

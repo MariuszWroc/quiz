@@ -16,9 +16,9 @@
 				<h:form>
 					<p:panel id="resultPanel" header="Result Panel">
 						<p:panelGrid columns="1" id="resultPanelGrid">
-							<p:outputLabel value="User name: #{quizController.firstname} #{quizController.lastname}" />
+							<p:outputLabel value="User name: #{userController.firstname} #{userController.lastname}" />
 							<p:outputLabel value="Score is: #{quizController.score}" />
-							<p:commandButton value="Zapisz" icon="ui-icon-check" action="#{quizController.saveResult}" ajax="false"/>
+							<p:commandButton value="Zapisz" icon="ui-icon-check" action="#{userController.saveResult}" ajax="false"/>
 						</p:panelGrid>
 					</p:panel>
 				</h:form>

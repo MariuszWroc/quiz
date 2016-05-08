@@ -5,6 +5,8 @@
  */
 package pl.myproject.quiz.controller;
 
+import static pl.myproject.quiz.util.constant.ApplicationValues.DEFAULT_QUIZ_POOL_SIZE;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,13 +27,9 @@ import javax.inject.Named;
 import org.primefaces.event.FlowEvent;
 
 import pl.myproject.quiz.model.Answer;
-import pl.myproject.quiz.model.Game;
 import pl.myproject.quiz.model.Question;
-import pl.myproject.quiz.model.User;
-import pl.myproject.quiz.service.IGameService;
 import pl.myproject.quiz.service.IQuestionPoolService;
 import pl.myproject.quiz.service.impl.QuestionPoolService;
-
 /**
  *
  * @author Mariusz Czarny
@@ -41,12 +39,8 @@ import pl.myproject.quiz.service.impl.QuestionPoolService;
 public class QuizController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = Logger.getLogger(QuizController.class.getName());
-    private static final int POOL_SIZE = 10;
     private String validAnswer;
     private String questionDescription;
-    private String firstname;
-    private String lastname;
-    private String email;
     private List<String> questionList;
     private List<String> answerList;
     private Map<String, Boolean> answerMap;
@@ -57,8 +51,7 @@ public class QuizController implements Serializable {
     private Integer score;
     @Inject
     private IQuestionPoolService poolService;
-    @Inject
-    private IGameService gameService;
+
 
     public QuizController() {
         questionDescription = "";
@@ -75,7 +68,7 @@ public class QuizController implements Serializable {
 
     @PostConstruct
     public void init() {
-        questionSet = poolService.getQuestionPool(POOL_SIZE);
+        questionSet = poolService.getQuestionPool(DEFAULT_QUIZ_POOL_SIZE.getNumber());
         questionPool.addAll(questionSet);
         questionPool.forEach(p -> LOGGER.info(p.toString()));
         prepareView();
@@ -130,30 +123,6 @@ public class QuizController implements Serializable {
     		score++;
     	}
     }
-
-	public String getFirstname() {
-			return firstname;
-	}
-
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
-	public String getLastname() {
-			return lastname;
-	}
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	   
     public void onTimeout(){  
         LOGGER.info("time out");
@@ -183,17 +152,7 @@ public class QuizController implements Serializable {
         }
     }
     
-    public String saveResult() {
-        User user = new User(firstname, lastname, email);
-        gameService.saveGameResult(user, score);
-        LOGGER.info("Quiz result saved " + user.toString() + " with score " + score);
-        List<Game> list = gameService.getGameList();
-        list.forEach(p -> LOGGER.info(p.toString()));
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "learning?faces-redirect=true";
-    }
-    
-    private List<String> parseQuestionsToList(List<Question> questionsToParse) {
+    private List<String> parseQuestionsToString(List<Question> questionsToParse) {
         List<String> questionParseList = new ArrayList<>();
         for (Question record : questionsToParse) {
             if (record.getDescription() != null) {
@@ -206,7 +165,7 @@ public class QuizController implements Serializable {
         return questionParseList;
     }
 
-    private List<String> parseAnswersToList(List<Answer> answerToParse) {
+    private List<String> parseAnswersToString(List<Answer> answerToParse) {
         List<String> answerParseList = new ArrayList<>();
         for (Answer record : answerToParse) {
             if (record.getDescription() != null) {
@@ -240,12 +199,12 @@ public class QuizController implements Serializable {
 	}
 
     private void prepareView() {
-        LOGGER.info("counter is " + questionCounter + ", size is " + POOL_SIZE);
-        if (questionCounter < POOL_SIZE) {
+        LOGGER.info("counter is " + questionCounter);
+        if (questionCounter < DEFAULT_QUIZ_POOL_SIZE.getNumber()) {
             final Question selectQuestion = questionPool.get(questionCounter);
             if (selectQuestion != null) {
-                questionList = parseQuestionsToList(questionPool);
-                answerList = parseAnswersToList(selectQuestion.getAnswerList());
+                questionList = parseQuestionsToString(questionPool);
+                answerList = parseAnswersToString(selectQuestion.getAnswerList());
                 questionDescription = selectQuestion.getDescription();
                 answerMap = parseAnswersToMap(selectQuestion.getAnswerList());
             }

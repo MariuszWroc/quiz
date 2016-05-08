@@ -40,12 +40,10 @@ public class SettingController implements Serializable{
     }
 
     public ApplicationSetting getSetting() {
-        LOGGER.info(setting.toString());
         return setting;
     }
 
     public void setSetting(ApplicationSetting setting) {
-        LOGGER.info(setting.toString());
         this.setting = setting;
     }
 
