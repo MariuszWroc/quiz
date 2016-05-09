@@ -23,10 +23,10 @@ public interface IRankingService {
      *
      * @return
      */
-    List<Ranking> getRankingList();
+    public List<Ranking> getRankingList();
 
     /**
      *
      */
-	void addRankingList(Ranking ranking);
+    public void addRankingList(Ranking ranking);
 }

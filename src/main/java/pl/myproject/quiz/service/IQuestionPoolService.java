@@ -22,6 +22,6 @@ public interface IQuestionPoolService {
      * @param size
      * @return
      */
-    Set<Question> getQuestionPool(int size);
+	public Set<Question> getQuestionPool(int size);
 
 }

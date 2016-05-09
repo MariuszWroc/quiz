@@ -55,7 +55,7 @@ public abstract class AbstractDaoXml<T> implements IAbstractDaoXml<T> {
     public AbstractDaoXml() {
         Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
-        type = (Class) pt.getActualTypeArguments()[0];
+        type = (Class<T>) pt.getActualTypeArguments()[0];
     }
 
     @Override
@@ -89,7 +89,8 @@ public abstract class AbstractDaoXml<T> implements IAbstractDaoXml<T> {
         return stringWriter;
     }
 
-    private void checkDirectory(final String directory) throws IOException {
+    @SuppressWarnings("unused")
+	private void checkDirectory(final String directory) throws IOException {
         Path path = Paths.get(directory);
         if (Files.isDirectory(path)) {
             LOGGER.info("it's a directory");
@@ -120,7 +121,8 @@ public abstract class AbstractDaoXml<T> implements IAbstractDaoXml<T> {
         }
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public T convertXMLToObject(String path) {
         LOGGER.info("convertXMLToObject");
         T entity = null;

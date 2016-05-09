@@ -6,7 +6,6 @@
 package pl.myproject.quiz.persistence;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +24,7 @@ public abstract class AbstractDao<T> extends AbstractDaoXml<T> implements IAbstr
     @Override
     public void add(T entity, String path, String filename) {
         try {
-            StringWorker<T> stringWorker = new StringWorker();
+            StringWorker<T> stringWorker = new StringWorker<T>();
             String filePath = stringWorker.createDirectory(entity, path, filename);
             convertObjectToXML(entity, filePath);
         } catch (NoSuchMethodException ex) {
@@ -52,13 +51,13 @@ public abstract class AbstractDao<T> extends AbstractDaoXml<T> implements IAbstr
         add(entity);
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public List<T> findAll() {
         File currentDirectory = new File("");
-        List<T> entity = new ArrayList<>();
         final List<String> clientfiles = FileSearch.displayDirectoryContents(currentDirectory);
         
-        return null;
+        return (List<T>) clientfiles;
     }
 
     @Override
@@ -67,7 +66,8 @@ public abstract class AbstractDao<T> extends AbstractDaoXml<T> implements IAbstr
         return findByName(filename);
     }
 
-    private T findByName(String filename) {
+    @SuppressWarnings("unchecked")
+	private T findByName(String filename) {
         T entity = convertXMLToObject(choosePathForFile());
         if (entity != null) {
             return entity;
@@ -79,7 +79,6 @@ public abstract class AbstractDao<T> extends AbstractDaoXml<T> implements IAbstr
 
     @Override
     public void delete(Integer id, String prefix) {
-        String filename = prefix.concat(id.toString());
         deleteXMLFile(choosePathForFile());
     }
 

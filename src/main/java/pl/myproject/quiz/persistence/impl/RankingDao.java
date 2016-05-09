@@ -9,7 +9,6 @@ import static pl.myproject.quiz.util.constant.ApplicationStrings.DEFAULT_PATH_LI
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 
@@ -26,14 +25,13 @@ import pl.myproject.quiz.util.RandomizeValue;
 */
 @Stateless
 public class RankingDao extends AbstractDao<Ranking> implements IRankingDao{
-    private static final Logger LOGGER = Logger.getLogger(RankingDao.class.getName());
     
     @Override
     public Ranking populateRandomRanking(int rankingId, int numberOfUsers, String description) {
         List<Game> gameList = new ArrayList<>();
         for (int i = 0; i < numberOfUsers; i++) {
             User user = new User(RandomizeValue.getRandomString(USER_FIRSTNAME), RandomizeValue.getRandomString(USER_SECONDNAME), SAMPLE_EMAIL);
-            Game game = new Game(i+1, user, RandomizeValue.getRandomInt(10), RandomizeValue.getRandomData(), RandomizeValue.getRandomInt(10));
+            Game game = new Game(i+1, user, RandomizeValue.getRandomInt(MAX_SCORE), RandomizeValue.getRandomData(), RandomizeValue.getRandomInt(MAX_SCORE));
             gameList.add(game);
         }
         Ranking ranking = new Ranking(rankingId, description, gameList);
@@ -44,7 +42,7 @@ public class RankingDao extends AbstractDao<Ranking> implements IRankingDao{
      public List<Ranking> populateRandomRankings(int numberOfRankings, String description) {
         List<Ranking> rankingList = new ArrayList<>();
         for(int i = 0; i < numberOfRankings; i++) {
-            Ranking ranking = populateRandomRanking(i+1, RandomizeValue.getRandomInt(10), SAMPLE_JOB_FAIR + i);
+            Ranking ranking = populateRandomRanking(i+1, RandomizeValue.getRandomInt(MAX_SCORE), SAMPLE_JOB_FAIR + i);
             rankingList.add(ranking);
         }
         return rankingList;

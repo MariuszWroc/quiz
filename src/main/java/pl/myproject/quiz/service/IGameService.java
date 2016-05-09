@@ -24,7 +24,7 @@ public interface IGameService {
      *
      * @return
      */
-    List<Game> getGameList();
+    public List<Game> getGameList();
 
-    Game saveGameResult(User user, Integer score);
+    public Game saveGameResult(User user, Integer score);
 }

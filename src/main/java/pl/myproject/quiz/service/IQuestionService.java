@@ -22,11 +22,8 @@ public interface IQuestionService {
      *
      * @return
      */
-	void deleteQuestionFromDB(Question entity);
-
-	void saveAllQuestionInDB(List<Question> entityList);
-
-	void saveQuestionInDB(Question entity);
-
-	void loadQuestionInDB();
+	public void deleteQuestionFromDB(Question entity);
+	public void saveAllQuestionInDB(List<Question> entityList);
+	public void saveQuestionInDB(Question entity);
+	public void loadQuestionInDB();
 }

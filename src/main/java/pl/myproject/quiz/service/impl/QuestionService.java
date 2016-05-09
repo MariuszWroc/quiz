@@ -7,14 +7,12 @@ package pl.myproject.quiz.service.impl;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import javax.ejb.Singleton;
 
 import pl.myproject.quiz.model.Question;
 import pl.myproject.quiz.persistence.IQuestionDao;
-import pl.myproject.quiz.service.IQuestionPoolService;
 import pl.myproject.quiz.service.IQuestionService;
 
 /**

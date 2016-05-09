@@ -5,21 +5,13 @@
  */
 package pl.myproject.quiz.main;
 
-import static pl.myproject.quiz.util.constant.ApplicationValues.DEFAULT_QUESTION_POOL_SIZE;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import pl.myproject.quiz.model.Answer;
-import pl.myproject.quiz.model.ApplicationSetting;
-import pl.myproject.quiz.model.Game;
 import pl.myproject.quiz.model.Question;
-import pl.myproject.quiz.model.User;
-import pl.myproject.quiz.persistence.IGameDao;
 import pl.myproject.quiz.persistence.IQuestionDao;
-import pl.myproject.quiz.persistence.impl.GameDao;
 import pl.myproject.quiz.persistence.impl.QuestionDao;
 import pl.myproject.quiz.service.IQuestionService;
 import pl.myproject.quiz.service.impl.QuestionService;
@@ -57,7 +49,8 @@ public class Main {
 //        printCollection(populateQuestionsPool);
     }
 
-    private static void printCollection(Collection<?> collection) {
+    @SuppressWarnings("unused")
+	private static void printCollection(Collection<?> collection) {
         collection.forEach(p -> System.out.println(p.toString()));
     }
 

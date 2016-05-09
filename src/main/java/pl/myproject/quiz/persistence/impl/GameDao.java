@@ -5,7 +5,6 @@ import static pl.myproject.quiz.util.SampleData.USER_FIRSTNAME;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 
@@ -21,7 +20,6 @@ import pl.myproject.quiz.util.RandomizeValue;
 */
 @Stateless
 public class GameDao extends AbstractDao<Game> implements IGameDao{
-    private static final Logger LOGGER = Logger.getLogger(GameDao.class.getName());
     
     @Override
     public String choosePathForFile() {
