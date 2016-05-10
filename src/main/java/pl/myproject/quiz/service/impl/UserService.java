@@ -10,6 +10,7 @@ import pl.myproject.quiz.model.User;
 import pl.myproject.quiz.service.IUserService;
 
 @Singleton
+@Deprecated
 public class UserService implements IUserService{
 	private static List<User> userList;
 	
