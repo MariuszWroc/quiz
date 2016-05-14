@@ -1,36 +1,38 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-    <f:view contentType="text/html">
-        <h:head>
-            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-        </h:head>
-        <h:body>
-            <ui:composition template="/template.xhtml">
-                <ui:define name="content">
-                    <h:form enctype="multipart/form-data">
-                        <p:growl id="messages" showDetail="true" />
+<f:view contentType="text/html">
+	<h:head>
+		<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+	</h:head>
+	<h:body>
+		<ui:composition template="/template.xhtml">
+			<ui:define name="content">
+				<h:form enctype="multipart/form-data">
+					<p:growl id="messages" showDetail="true" />
 
-                        <h:panelGrid columnClasses="value">
-                            <h3 style="margin-top: 0">Event Scheduler</h3>
-                            
+					<h:panelGrid columnClasses="value">
+						<h3 style="margin-top: 0">Event Scheduler</h3>
+						<p:outputLabel for="inline" value="Inline:" />
+						<p:calendar id="inline" value="#{calendarView.date1}"
+							mode="inline" />
 
-                        </h:panelGrid>
+					</h:panelGrid>
 
-                        <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
-                            <h:panelGrid id="eventDetails" columns="2">
-                            </h:panelGrid>
-                        </p:dialog>    
-                    </h:form>
-                </ui:define>
-            </ui:composition>
-        </h:body>
-    </f:view>
-    
+					<p:dialog widgetVar="eventDialog" header="Event Details"
+						showEffect="clip" hideEffect="clip">
+						<h:panelGrid id="eventDetails" columns="2">
+						</h:panelGrid>
+					</p:dialog>
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>
+
 </html>
 
-  

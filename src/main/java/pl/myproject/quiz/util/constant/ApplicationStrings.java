@@ -6,10 +6,10 @@ package pl.myproject.quiz.util.constant;
  */
 public enum ApplicationStrings {
     DEFAULT_PATH("C:\\Users\\xe050991049\\Documents\\NetBeansProjects\\EYGame\\src\\resources\\"),
-    DEFAULT_PATH_LINUX("/home/mariusz/tmp/"),
+    DEFAULT_PATH_LINUX("/home/mariusz/"),
     CATALOG_QUESTION("quiz_pool"),
     CATALOG_SETTING("applicationsetting"),
-    CATALOG_RANKING("result"),
+    CATALOG_RANKING("ranking"),
     DEFAULT_THEME("south-street");
 
     private final String name;

@@ -10,9 +10,11 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
+import javax.inject.Inject;
 
 import pl.myproject.quiz.model.Game;
 import pl.myproject.quiz.model.User;
+import pl.myproject.quiz.persistence.IGameDao;
 import pl.myproject.quiz.service.IGameService;
 /**
  *
@@ -21,6 +23,9 @@ import pl.myproject.quiz.service.IGameService;
 @Singleton
 public class GameService implements IGameService{
 	private List<Game> gameList;
+	
+	@Inject
+	private IGameDao dao;
 
 	@PostConstruct
 	public void init() {
@@ -36,6 +41,7 @@ public class GameService implements IGameService{
     public Game saveGameResult(User user, Integer score) {
         Game game = new Game(user, score);    
         gameList.add(game);
+        dao.add(game);
         return game;
     }
 }
