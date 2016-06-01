@@ -5,212 +5,182 @@
  */
 package pl.myproject.quiz.persistence.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.StringWriter;
 import java.util.List;
-import javax.ejb.embeddable.EJBContainer;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.util.logging.Logger;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doThrow;
 import pl.myproject.quiz.model.Game;
-import pl.myproject.quiz.persistence.IGameDao;
 
 /**
  *
- * @author XE050991049
+ * @author Mariusz Czarny
  */
-public class GameDaoTest extends TestCase {
-    
-    public GameDaoTest(String testName) {
-        super(testName);
-    }
+public class GameDaoTest {
+	private static final Logger logger = Logger.getLogger(GameDaoTest.class.getName());
+	private static Game game;
+	private static GameDao mockedGameDao;
 
-    public static Test suite() {
-        TestSuite suite = new TestSuite(GameDaoTest.class);
-        return suite;
-    }
-    
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-    
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
-
+	@BeforeClass
+	protected void setUp() {
+		mockedGameDao = mock(GameDao.class);
+		
+		game = new Game();
+		
+		doThrow(new Exception()).when(mockedGameDao).add(game);
+	}
     /**
      * Test of convertObjectToXML method, of class GameDao.
      */
+	@Test	
     public void testConvertObjectToXML() throws Exception {
-        System.out.println("convertObjectToXML");
+		logger.info("convertObjectToXML");
         Game entity = null;
         String filePath = "";
-        GameDao instance = new GameDao();
         StringWriter expResult = null;
-        StringWriter result = instance.convertObjectToXML(entity, filePath);
+        StringWriter result = mockedGameDao.convertObjectToXML(entity, filePath);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of convertXMLToObject method, of class GameDao.
      */
+	@Test
     public void testConvertXMLToObject() throws Exception {
-        System.out.println("convertXMLToObject");
+		logger.info("convertXMLToObject");
         String path = "";
-        GameDao instance = new GameDao();
         Game expResult = null;
-        Game result = instance.convertXMLToObject(path);
+        Game result = mockedGameDao.convertXMLToObject(path);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of deleteXMLFile method, of class GameDao.
      */
+	@Test
     public void testDeleteXMLFile() throws Exception {
-        System.out.println("deleteXMLFile");
+		logger.info("deleteXMLFile");
         String path = "";
-        GameDao instance = new GameDao();
-        instance.deleteXMLFile(path);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        mockedGameDao.deleteXMLFile(path);
     }
 
     /**
      * Test of updateXMLFile method, of class GameDao.
      */
+	@Test
     public void testUpdateXMLFile() throws Exception {
-        System.out.println("updateXMLFile");
+		logger.info("updateXMLFile");
         String path = "";
-        GameDao instance = new GameDao();
-        instance.updateXMLFile(path);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        mockedGameDao.updateXMLFile(path);
     }
 
     /**
      * Test of add method, of class GameDao.
      */
+	@Test
     public void testAdd_3args() throws Exception {
-        System.out.println("add");
+		logger.info("add");
         Game entity = null;
         String path = "";
         String filename = "";
-        GameDao instance = new GameDao();
-        instance.add(entity, path, filename);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        mockedGameDao.add(entity, path, filename);
     }
 
     /**
      * Test of add method, of class GameDao.
      */
+	@Test
     public void testAdd_GenericType() throws Exception {
-        System.out.println("add");
+		logger.info("add");
         Game entity = null;
-        GameDao instance = new GameDao();
-        instance.add(entity);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        mockedGameDao.add(entity);
     }
 
     /**
      * Test of add method, of class GameDao.
      */
+	@Test
     public void testAdd_GenericType_Integer() throws Exception {
-        System.out.println("add");
+		logger.info("add");
         Game entity = null;
         Integer id = null;
-        GameDao instance = new GameDao();
-        instance.add(entity, id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        mockedGameDao.add(entity, id);
     }
 
     /**
      * Test of update method, of class GameDao.
      */
+	@Test
     public void testUpdate() throws Exception {
-        System.out.println("update");
+		logger.info("update");
         Game entity = null;
-        GameDao instance = new GameDao();
-        instance.update(entity);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        mockedGameDao.update(entity);
     }
 
     /**
      * Test of findAll method, of class GameDao.
      */
+	@Test
     public void testFindAll() throws Exception {
-        System.out.println("findAll");
-        GameDao instance = new GameDao();
+		logger.info("findAll");
         List<Game> expResult = null;
-        List<Game> result = instance.findAll();
+        List<Game> result = mockedGameDao.findAll();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of findById method, of class GameDao.
      */
+	@Test
     public void testFindById() throws Exception {
-        System.out.println("findById");
+		logger.info("findById");
         Integer id = null;
         String prefix = "";
-        GameDao instance = new GameDao();
         Game expResult = null;
-        Game result = instance.findById(id, prefix);
+        Game result = mockedGameDao.findById(id, prefix);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of delete method, of class GameDao.
      */
+	@Test
     public void testDelete() throws Exception {
-        System.out.println("delete");
+		logger.info("delete");
         Integer id = null;
         String prefix = "";
-        GameDao instance = new GameDao();
-        instance.delete(id, prefix);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        mockedGameDao.delete(id, prefix);
     }
 
     /**
      * Test of choosePathForFile method, of class GameDao.
      */
+	@Test
     public void testChoosePathForFile() throws Exception {
-        System.out.println("choosePathForFile");
-        GameDao instance = new GameDao();
+		logger.info("choosePathForFile");
         String expResult = "";
-        String result = instance.choosePathForFile();
+        String result = mockedGameDao.choosePathForFile();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of populateRandomGame method, of class GameDao.
      */
+	@Test
     public void testPopulateRandomGame() throws Exception {
-        System.out.println("populateRandomGame");
+		logger.info("populateRandomGame");
         int numberOfGames = 0;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        IGameDao instance = (IGameDao)container.getContext().lookup("java:global/classes/GameDao");
         List<Game> expResult = null;
-        List<Game> result = instance.populateRandomGame(numberOfGames);
+        List<Game> result = mockedGameDao.populateRandomGame(numberOfGames);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

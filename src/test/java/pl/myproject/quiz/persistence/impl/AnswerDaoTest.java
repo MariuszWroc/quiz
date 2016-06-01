@@ -5,53 +5,55 @@
  */
 package pl.myproject.quiz.persistence.impl;
 
+import java.util.Arrays;
 import java.util.List;
-import javax.ejb.embeddable.EJBContainer;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.util.logging.Logger;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import pl.myproject.quiz.model.Answer;
-import pl.myproject.quiz.persistence.IAnswerDao;
 
 /**
  *
- * @author XE050991049
+ * @author Mariusz Czarny
  */
-public class AnswerDaoTest extends TestCase {
+public class AnswerDaoTest {
+	private static final Logger logger = Logger.getLogger(AnswerDaoTest.class.getName());
+	private static Answer answerOne;
+	private static Answer answerTwo;
+	private static Answer answerThree;
+	private static AnswerDao mockedAnswerDao;
     
-    public AnswerDaoTest(String testName) {
-        super(testName);
-    }
-
-    public static Test suite() {
-        TestSuite suite = new TestSuite(AnswerDaoTest.class);
-        return suite;
-    }
-    
-    @Override
+	@BeforeClass
     protected void setUp() throws Exception {
-        super.setUp();
-    }
-    
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
+		mockedAnswerDao = mock(AnswerDao.class);
+		
+		init();
+		
+		when(mockedAnswerDao.populateRandomAnswer(3)).thenReturn(Arrays.asList(answerOne, answerTwo, answerThree));
     }
 
-    /**
-     * Test of populateRandomAnswer method, of class AnswerDao.
-     */
+	private void init() {
+		answerOne = new Answer(1, "opis1", true); 
+		answerTwo = new Answer(2, "opis2", true); 
+		answerThree = new Answer(3, "opis3", true); 
+	}
+    
+    @AfterClass
+    protected void tearDown() throws Exception {
+    }
+
+    @Test
     public void testPopulateRandomAnswer() throws Exception {
-        System.out.println("populateRandomAnswer");
-        int answersNumberPerQuestion = 0;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        IAnswerDao instance = (IAnswerDao)container.getContext().lookup("java:global/classes/AnswerDao");
-        List<Answer> expResult = null;
-        List<Answer> result = instance.populateRandomAnswer(answersNumberPerQuestion);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    	logger.info("populateRandomAnswer");
+        List<Answer> allAnswers = mockedAnswerDao.populateRandomAnswer(3);
+        assertEquals(3, allAnswers.size());
     }
     
 }
