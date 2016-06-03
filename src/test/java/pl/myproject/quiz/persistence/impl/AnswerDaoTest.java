@@ -13,7 +13,6 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -31,7 +30,7 @@ public class AnswerDaoTest {
 	private static AnswerDao mockedAnswerDao;
     
 	@BeforeClass
-    protected void setUp() throws Exception {
+    public static void setUp() throws Exception {
 		mockedAnswerDao = mock(AnswerDao.class);
 		
 		init();
@@ -39,16 +38,12 @@ public class AnswerDaoTest {
 		when(mockedAnswerDao.populateRandomAnswer(3)).thenReturn(Arrays.asList(answerOne, answerTwo, answerThree));
     }
 
-	private void init() {
+	private static void init() {
 		answerOne = new Answer(1, "opis1", true); 
 		answerTwo = new Answer(2, "opis2", true); 
 		answerThree = new Answer(3, "opis3", true); 
 	}
     
-    @AfterClass
-    protected void tearDown() throws Exception {
-    }
-
     @Test
     public void testPopulateRandomAnswer() throws Exception {
     	logger.info("populateRandomAnswer");

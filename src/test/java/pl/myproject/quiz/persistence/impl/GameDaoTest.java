@@ -14,9 +14,7 @@ import java.util.logging.Logger;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.doThrow;
 import pl.myproject.quiz.model.Game;
 
@@ -30,7 +28,7 @@ public class GameDaoTest {
 	private static GameDao mockedGameDao;
 
 	@BeforeClass
-	protected void setUp() {
+	public static void setUp() {
 		mockedGameDao = mock(GameDao.class);
 		
 		game = new Game();

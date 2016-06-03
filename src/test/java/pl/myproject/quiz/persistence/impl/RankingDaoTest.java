@@ -7,14 +7,12 @@ package pl.myproject.quiz.persistence.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.StringWriter;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.doThrow;
 import pl.myproject.quiz.model.Ranking;
@@ -30,7 +28,7 @@ public class RankingDaoTest {
 	private static IRankingDao mockedRankingDao;
 
 	@BeforeClass
-	private void setUp() {
+	public static void setUp() {
 		mockedRankingDao = mock(RankingDao.class);
 		
 		ranking = new Ranking();
