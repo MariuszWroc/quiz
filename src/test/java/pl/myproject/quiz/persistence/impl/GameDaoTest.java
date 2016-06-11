@@ -5,45 +5,35 @@
  */
 package pl.myproject.quiz.persistence.impl;
 
+import static org.junit.Assert.*;
+
 import java.io.StringWriter;
 import java.util.List;
+import java.util.logging.Logger;
+
 import javax.ejb.embeddable.EJBContainer;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+
+import org.junit.BeforeClass;
+
 import pl.myproject.quiz.model.Game;
 import pl.myproject.quiz.persistence.IGameDao;
 
 /**
  *
- * @author XE050991049
+ * @author Mariusz Czarny
  */
-public class GameDaoTest extends TestCase {
+public class GameDaoTest {
+    private static Logger logger = Logger.getLogger(GameDaoTest.class.getName());
     
-    public GameDaoTest(String testName) {
-        super(testName);
-    }
-
-    public static Test suite() {
-        TestSuite suite = new TestSuite(GameDaoTest.class);
-        return suite;
-    }
-    
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-    
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @BeforeClass
+    private static void setUp() throws Exception {
     }
 
     /**
      * Test of convertObjectToXML method, of class GameDao.
      */
     public void testConvertObjectToXML() throws Exception {
-        System.out.println("convertObjectToXML");
+    	logger.info("convertObjectToXML");
         Game entity = null;
         String filePath = "";
         GameDao instance = new GameDao();

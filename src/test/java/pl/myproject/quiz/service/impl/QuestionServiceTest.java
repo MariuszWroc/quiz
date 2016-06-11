@@ -5,44 +5,34 @@
  */
 package pl.myproject.quiz.service.impl;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
+import java.util.logging.Logger;
+
 import javax.ejb.embeddable.EJBContainer;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+
+import org.junit.BeforeClass;
+
 import pl.myproject.quiz.model.Question;
 import pl.myproject.quiz.service.IQuestionService;
 
 /**
  *
- * @author XE050991049
+ * @author Mariusz Czarny
  */
-public class QuestionServiceTest extends TestCase {
+public class QuestionServiceTest {
+    private static Logger logger = Logger.getLogger(QuestionServiceTest.class.getName());
     
-    public QuestionServiceTest(String testName) {
-        super(testName);
-    }
-
-    public static Test suite() {
-        TestSuite suite = new TestSuite(QuestionServiceTest.class);
-        return suite;
-    }
-    
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-    
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @BeforeClass
+    private static void setUp() throws Exception {
     }
 
     /**
      * Test of loadQuestionInDB method, of class QuestionService.
      */
     public void testLoadQuestionInDB() throws Exception {
-        System.out.println("loadQuestionInDB");
+    	logger.info("loadQuestionInDB");
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
         IQuestionService instance = (IQuestionService)container.getContext().lookup("java:global/classes/QuestionService");
         instance.loadQuestionInDB();
@@ -55,7 +45,7 @@ public class QuestionServiceTest extends TestCase {
      * Test of saveQuestionInDB method, of class QuestionService.
      */
     public void testSaveQuestionInDB() throws Exception {
-        System.out.println("saveQuestionInDB");
+    	logger.info("saveQuestionInDB");
         Question entity = null;
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
         IQuestionService instance = (IQuestionService)container.getContext().lookup("java:global/classes/QuestionService");
@@ -69,7 +59,7 @@ public class QuestionServiceTest extends TestCase {
      * Test of saveAllQuestionInDB method, of class QuestionService.
      */
     public void testSaveAllQuestionInDB() throws Exception {
-        System.out.println("saveAllQuestionInDB");
+    	logger.info("saveAllQuestionInDB");
         List<Question> entityList = null;
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
         IQuestionService instance = (IQuestionService)container.getContext().lookup("java:global/classes/QuestionService");
@@ -83,7 +73,7 @@ public class QuestionServiceTest extends TestCase {
      * Test of deleteQuestionFromDB method, of class QuestionService.
      */
     public void testDeleteQuestionFromDB() throws Exception {
-        System.out.println("deleteQuestionFromDB");
+    	logger.info("deleteQuestionFromDB");
         Question entity = null;
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
         IQuestionService instance = (IQuestionService)container.getContext().lookup("java:global/classes/QuestionService");

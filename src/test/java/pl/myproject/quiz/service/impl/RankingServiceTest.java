@@ -5,44 +5,35 @@
  */
 package pl.myproject.quiz.service.impl;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
+import java.util.logging.Logger;
+
 import javax.ejb.embeddable.EJBContainer;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+
+
+import org.junit.BeforeClass;
+
 import pl.myproject.quiz.model.Ranking;
 import pl.myproject.quiz.service.IRankingService;
 
 /**
  *
- * @author XE050991049
+ * @author Mariusz Czarny
  */
-public class RankingServiceTest extends TestCase {
+public class RankingServiceTest {
+    private static Logger logger = Logger.getLogger(RankingServiceTest.class.getName());
     
-    public RankingServiceTest(String testName) {
-        super(testName);
-    }
-
-    public static Test suite() {
-        TestSuite suite = new TestSuite(RankingServiceTest.class);
-        return suite;
-    }
-    
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-    
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @BeforeClass
+    private static void setUp() throws Exception {
     }
 
     /**
      * Test of getRankingList method, of class RankingService.
      */
     public void testGetRankingList() throws Exception {
-        System.out.println("getRankingList");
+    	logger.info("getRankingList");
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
         IRankingService instance = (IRankingService)container.getContext().lookup("java:global/classes/RankingService");
         List<Ranking> expResult = null;
@@ -57,7 +48,7 @@ public class RankingServiceTest extends TestCase {
      * Test of addRankingList method, of class RankingService.
      */
     public void testAddRankingList() throws Exception {
-        System.out.println("addRankingList");
+    	logger.info("addRankingList");
         Ranking entity = null;
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
         IRankingService instance = (IRankingService)container.getContext().lookup("java:global/classes/RankingService");

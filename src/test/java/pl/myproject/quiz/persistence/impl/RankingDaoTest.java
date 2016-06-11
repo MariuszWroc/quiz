@@ -5,45 +5,35 @@
  */
 package pl.myproject.quiz.persistence.impl;
 
+import static org.junit.Assert.*;
+
 import java.io.StringWriter;
 import java.util.List;
+import java.util.logging.Logger;
+
 import javax.ejb.embeddable.EJBContainer;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+
+import org.junit.BeforeClass;
+
 import pl.myproject.quiz.model.Ranking;
 import pl.myproject.quiz.persistence.IRankingDao;
 
 /**
  *
- * @author XE050991049
+ * @author Mariusz Czarny
  */
-public class RankingDaoTest extends TestCase {
+public class RankingDaoTest {
+    private static Logger logger = Logger.getLogger(RankingDaoTest.class.getName());
     
-    public RankingDaoTest(String testName) {
-        super(testName);
-    }
-
-    public static Test suite() {
-        TestSuite suite = new TestSuite(RankingDaoTest.class);
-        return suite;
-    }
-    
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-    
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @BeforeClass
+    private static void setUp() throws Exception {
     }
 
     /**
      * Test of convertObjectToXML method, of class RankingDao.
      */
     public void testConvertObjectToXML() throws Exception {
-        System.out.println("convertObjectToXML");
+    	logger.info("convertObjectToXML");
         Ranking entity = null;
         String filePath = "";
         RankingDao instance = new RankingDao();
@@ -58,7 +48,7 @@ public class RankingDaoTest extends TestCase {
      * Test of convertXMLToObject method, of class RankingDao.
      */
     public void testConvertXMLToObject() throws Exception {
-        System.out.println("convertXMLToObject");
+    	logger.info("convertXMLToObject");
         String path = "";
         RankingDao instance = new RankingDao();
         Ranking expResult = null;
@@ -72,7 +62,7 @@ public class RankingDaoTest extends TestCase {
      * Test of deleteXMLFile method, of class RankingDao.
      */
     public void testDeleteXMLFile() throws Exception {
-        System.out.println("deleteXMLFile");
+    	logger.info("deleteXMLFile");
         String path = "";
         RankingDao instance = new RankingDao();
         instance.deleteXMLFile(path);
@@ -84,7 +74,7 @@ public class RankingDaoTest extends TestCase {
      * Test of updateXMLFile method, of class RankingDao.
      */
     public void testUpdateXMLFile() throws Exception {
-        System.out.println("updateXMLFile");
+    	logger.info("updateXMLFile");
         String path = "";
         RankingDao instance = new RankingDao();
         instance.updateXMLFile(path);

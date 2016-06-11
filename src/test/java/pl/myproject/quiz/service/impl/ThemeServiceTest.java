@@ -5,35 +5,24 @@
  */
 package pl.myproject.quiz.service.impl;
 
+import static org.junit.Assert.*;
+
 import java.util.Map;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.util.logging.Logger;
+
+import org.junit.BeforeClass;
+
 import pl.myproject.quiz.model.Theme;
 
 /**
  *
- * @author XE050991049
+ * @author Mariusz Czarny
  */
-public class ThemeServiceTest extends TestCase {
-    
-    public ThemeServiceTest(String testName) {
-        super(testName);
-    }
+public class ThemeServiceTest {
+    private static Logger logger = Logger.getLogger(ThemeServiceTest.class.getName());
 
-    public static Test suite() {
-        TestSuite suite = new TestSuite(ThemeServiceTest.class);
-        return suite;
-    }
-    
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-    
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @BeforeClass
+    private static void setUp() throws Exception {
     }
 
     /**
@@ -51,7 +40,7 @@ public class ThemeServiceTest extends TestCase {
      * Test of getThemes method, of class ThemeService.
      */
     public void testGetThemes() {
-        System.out.println("getThemes");
+    	logger.info("getThemes");
         ThemeService instance = new ThemeService();
         Map<String, Theme> expResult = null;
         Map<String, Theme> result = instance.getThemes();
