@@ -5,31 +5,28 @@
  */
 package pl.myproject.quiz.service.impl;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
+import java.util.logging.Logger;
+
 import javax.ejb.embeddable.EJBContainer;
-import junit.framework.TestCase;
+
+import org.junit.BeforeClass;
+
 import pl.myproject.quiz.model.Game;
 import pl.myproject.quiz.model.User;
 import pl.myproject.quiz.service.IGameService;
 
 /**
  *
- * @author XE050991049
+ * @author Mariusz Czarny
  */
-public class GameServiceTest extends TestCase {
-    
-    public GameServiceTest(String testName) {
-        super(testName);
-    }
-    
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-    
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
+public class GameServiceTest {
+    private static Logger logger = Logger.getLogger(GameServiceTest.class.getName());
+
+    @BeforeClass
+    private static void setUp() throws Exception {
     }
 
     /**
@@ -47,7 +44,7 @@ public class GameServiceTest extends TestCase {
      * Test of getGameList method, of class GameService.
      */
     public void testGetGameList() throws Exception {
-        System.out.println("getGameList");
+    	logger.info("getGameList");
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
         IGameService instance = (IGameService)container.getContext().lookup("java:global/classes/GameService");
         List<Game> expResult = null;
@@ -62,7 +59,7 @@ public class GameServiceTest extends TestCase {
      * Test of saveGameResult method, of class GameService.
      */
     public void testSaveGameResult() throws Exception {
-        System.out.println("saveGameResult");
+    	logger.info("saveGameResult");
         User user = null;
         Integer score = null;
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();

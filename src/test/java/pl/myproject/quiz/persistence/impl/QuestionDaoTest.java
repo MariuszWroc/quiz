@@ -5,6 +5,8 @@
  */
 package pl.myproject.quiz.persistence.impl;
 
+import static org.junit.Assert.*;
+
 import java.io.StringWriter;
 import java.util.List;
 import java.util.Set;

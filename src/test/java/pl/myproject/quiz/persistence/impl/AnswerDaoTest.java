@@ -6,6 +6,7 @@
 package pl.myproject.quiz.persistence.impl;
 
 import java.util.Arrays;
+
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -28,7 +29,6 @@ public class AnswerDaoTest {
 	private static Answer answerTwo;
 	private static Answer answerThree;
 	private static AnswerDao mockedAnswerDao;
-    
 	@BeforeClass
     public static void setUp() throws Exception {
 		mockedAnswerDao = mock(AnswerDao.class);

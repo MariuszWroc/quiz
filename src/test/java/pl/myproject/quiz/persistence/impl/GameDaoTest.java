@@ -26,7 +26,6 @@ public class GameDaoTest {
 	private static final Logger logger = Logger.getLogger(GameDaoTest.class.getName());
 	private static Game game;
 	private static GameDao mockedGameDao;
-
 	@BeforeClass
 	public static void setUp() {
 		mockedGameDao = mock(GameDao.class);
