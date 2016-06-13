@@ -68,11 +68,13 @@ public class QuestionDao extends AbstractDao<Question> implements IQuestionDao{
     public Set<Question> populateQuestionsPool(int questionPoolSize, int answersNumberPerQuestion) {
         Set<Question> questionSet = new HashSet<>();
         int i = 1;
-        while (i != questionPoolSize) {
-            Question question = new Question(i, RandomizeValue.getRandomString(QUESTION), answerDao.populateRandomAnswer(answersNumberPerQuestion));
-            questionSet.add(question);
-            i = questionSet.size();
-            LOGGER.info("Iteration number in set populate method " + i);
+        if (answerDao != null) {
+	        while (i != questionPoolSize) {
+				Question question = new Question(i, RandomizeValue.getRandomString(QUESTION), answerDao.populateRandomAnswer(answersNumberPerQuestion));
+	            questionSet.add(question);
+	            i = questionSet.size();
+	            LOGGER.info("Iteration number in set populate method " + i);
+	        }
         }
         return questionSet;
     }

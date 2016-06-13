@@ -64,8 +64,7 @@ public class UserController implements Serializable {
         User user = new User(firstname, lastname, email);
         gameService.saveGameResult(user, score);
         LOGGER.info("Quiz result saved " + user.toString() + " with score " + score);
-        List<Game> list = gameService.getGameList();
-        list.forEach(p -> LOGGER.info(p.toString()));
+
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "index?faces-redirect=true";
     }
