@@ -21,7 +21,6 @@ import static pl.myproject.quiz.util.constant.ApplicationValues.*;
 @ApplicationScoped
 public class ApplicationSetting implements Serializable{
     private static final long serialVersionUID = 1L;
-//    private final String id = "Global";    
     private Integer questionPoolSize;
     private Integer timeForAnswer;
     private String personalEmail;
@@ -54,10 +53,6 @@ public class ApplicationSetting implements Serializable{
     public void setPersonalEmail(String personalEmail) {
         this.personalEmail = personalEmail;
     }
-
-//    public String getId() {
-//        return id;
-//    }
 
     @Override
     public String toString() {

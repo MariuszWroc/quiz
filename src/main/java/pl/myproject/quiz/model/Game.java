@@ -1,72 +1,54 @@
 package pl.myproject.quiz.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import pl.myproject.quiz.util.DateAdapter;
 /**
  *
  * @author Mariusz Czarny
  */
 
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder={"id", "user", "date", "score", "quizTime"})
 public class Game implements Serializable {
 	private static final long serialVersionUID = 1L;
+	@XmlAttribute 
 	private Integer id;
     private User user;
-    private List<Question> questionList;
+    @XmlElement(name = "timestamp", required = true) 
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Date date;
-    private Integer timeForAnswer;
+    private Integer resultTime;
     private Integer score;
 
     public Game() {
     }
     
-    public Game(Integer id, User user, List<Question> questionList, Integer timeForAnswer) {
-        this.id = id;
-        this.user = user;
-        this.questionList = questionList;
-        this.timeForAnswer = timeForAnswer;
-    }
+    public Game(Integer id, User user, Date date, Integer resultTime, Integer score) {
+		this.id = id;
+		this.user = user;
+		this.date = date;
+		this.resultTime = resultTime;
+		this.score = score;
+	}
+    
+	public Game(Integer id, User user, Integer score) {
+		this.id = id;
+		this.user = user;
+		this.score = score;
+	}
 
-    public Game(Integer id, User user, Integer score, List<Question> questionList) {
-        this.id = id;
-        this.user = user;
-        this.questionList = questionList;
-        this.score = score;
-    }
-    
-    public Game(Integer id, User user, Integer score, Date date, Integer timeForAnswer) {
-        this.id = id;
-        this.user = user;
-        this.score = score;
-        this.date = date;
-        this.timeForAnswer = timeForAnswer;
-    }
-    
-    public Game(Integer id, User user, Integer score) {
-        this.id = id;
-        this.user = user;
-        this.score = score;
-    }
-    
-    public Game(Integer id, User user) {
-        this.id = id;
-        this.user = user;
-    }
-    
-    public Game(User user, Integer timeForAnswer) {
-    	this.id = 1;
-        this.user = user;
-        this.score = 0;
-        this.timeForAnswer = timeForAnswer;
-        this.questionList = new ArrayList<Question>();
-    }
-
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 
@@ -82,23 +64,15 @@ public class Game implements Serializable {
         this.user = user;
     }
 
-    public List<Question> getQuestionList() {
-        return questionList;
-    }
+	public Integer getResultTime() {
+		return resultTime;
+	}
+	
+	public void setResultTime(Integer resultTime) {
+		this.resultTime = resultTime;
+	}
 
-    public void setQuestionList(List<Question> questionList) {
-        this.questionList = questionList;
-    }
-
-    public Integer getTimeForAnswer() {
-        return timeForAnswer;
-    }
-
-    public void setTimeForAnswer(Integer timeForAnswer) {
-        this.timeForAnswer = timeForAnswer;
-    }
-
-    public Integer getScore() {
+	public Integer getScore() {
         return score;
     }
 
@@ -116,7 +90,7 @@ public class Game implements Serializable {
     
     @Override
     public String toString() {
-        return "Game [user=" + user + ", questions=" + questionList + ", timeForAnswer=" + timeForAnswer + ", score=" + score + "]";
+        return "Game [user=" + user + ", resultTime=" + resultTime + ", score=" + score + "]";
     }
 
 }

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+        </h:head>
+        <h:body>
+            <ui:composition template="/template.xhtml">
+                <ui:define name="content">
+                    <p:growl id="growl" showDetail="true"/>  
+                    <p:panel id="masterPanel" style="margin-bottom:20px ">
+                        <p:dataTable id="masterTable" var="oneRanking" value="#{rankingController.rankingList}" paginator="true" rows="3" 
+                        			 emptyMessage="brak pytań w puli" rowKey="#{oneRanking.id}" selection="#{rankingController.selectedRanking}" 
+                        			 selectionMode="single" editable="true">  
+
+                            <p:ajax event="rowSelect" listener="#{rankingController.onRowSelect}"   
+                                    update=":form:detailTable" />  
+                            <p:ajax event="rowUnselect" listener="#{rankingController.onRowUnselect}" update=":form:detailTable"/>
+                            <p:ajax event="rowEdit" listener="#{questionController.onRowEdit}" update=":form:growl" />
+                            <p:ajax event="rowEditCancel" listener="#{questionController.onRowCancel}" update=":form:growl" />  
+
+                            <p:column headerText="Ranking (opis)" >
+                                    	<h:outputText value="#{oneRanking.description}" />
+                            </p:column>
+                        </p:dataTable>  
+                    </p:panel>
+                    <p:panel id="detailPanel" style="margin-bottom:20px ">
+                        <p:dataTable id="detailTable" var="rankingRow" rowKey="#{user.id}" value="#{rankingController.selectedRanking.gameList}" paginator="true" rows="10" emptyMessage="brak odpowiedzi">   
+
+                            <p:column headerText="Imię" sortBy="#{rankingRow.user.firstname}">  
+                                #{rankingRow.user.firstname}  
+                            </p:column>
+                            <p:column headerText="Nazwisko" sortBy="#{rankingRow.user.lastname}">  
+                                #{rankingRow.user.lastname}  
+                            </p:column>                            
+                            <p:column headerText="Punkty" sortBy="#{rankingRow.points}">  
+                                <p:rating value="#{rankingRow.points}" readonly="true"/>  
+                            </p:column>
+                        </p:dataTable> 
+                    </p:panel>
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>
+

@@ -15,7 +15,7 @@ and open the template in the editor.
         <!--<h:outputStylesheet name="css/home.css"/>-->
         <meta name="viewport" content="width=device-width"/>
         <h:outputStylesheet library="css" name="general.css"/>
-        <title>home page</title>
+        <title>Ranking</title>
     </h:head>
     <h:body>
         <h:form id="form">
@@ -26,7 +26,10 @@ and open the template in the editor.
                             <p:menuitem value="Rozgrywka czasowa" outcome="/menu/game/user"/>
                             <p:menuitem value="Tryb nauki" outcome="/menu/game/learning"/>
                         </p:submenu>
-                        <p:menuitem value="Ranking" outcome="/menu/ranking/rankings"/>
+                        <p:submenu label="Ranking">
+                            <p:menuitem value="Aktualny" outcome="/menu/ranking/actual"/>
+                            <p:menuitem value="Archiwalne" outcome="/menu/ranking/historical"/>
+                        </p:submenu>
                         <p:submenu label="Ustawienia">
                             <p:menuitem value="Edycja pytań" outcome="/menu/settings/editQuestions"/>
                             <p:menuitem value="Import/Eksport" outcome="/menu/settings/importExport"/> 

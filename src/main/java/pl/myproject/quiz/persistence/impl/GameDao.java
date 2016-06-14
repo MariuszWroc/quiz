@@ -22,8 +22,9 @@ import pl.myproject.quiz.util.RandomizeValue;
 */
 @Stateless
 public class GameDao extends AbstractDao<Game> implements IGameDao{
-    
-    @Override
+    private static final int MAX_POINTS_IN_QUIZ = 10;
+
+	@Override
     public String choosePathForFile() {
         String pathfile = DEFAULT_PATH_LINUX.getName().concat(CATALOG_RANKING.getName());
 
@@ -35,7 +36,7 @@ public class GameDao extends AbstractDao<Game> implements IGameDao{
         List<Game> gameList = new ArrayList<>();
         User user = new User(RandomizeValue.getRandomString(USER_FIRSTNAME), RandomizeValue.getRandomString(USER_FIRSTNAME), SAMPLE_EMAIL);
         for (int i = 0; i < numberOfGames; i++) {
-            Game game = new Game(i, user);
+            Game game = new Game(i, user, RandomizeValue.getRandomInt(MAX_POINTS_IN_QUIZ));
             gameList.add(game);
         }
         return gameList;

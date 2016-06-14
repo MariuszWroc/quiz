@@ -25,17 +25,17 @@ import pl.myproject.quiz.util.RandomizeValue;
 */
 @Stateless
 public class RankingDao extends AbstractDao<Ranking> implements IRankingDao{
-    
-    @Override
+    private static final int MAX_TIME = 100;
+
+	@Override
     public Ranking populateRandomRanking(int rankingId, int numberOfUsers, String description) {
         List<Game> gameList = new ArrayList<>();
         for (int i = 0; i < numberOfUsers; i++) {
             User user = new User(RandomizeValue.getRandomString(USER_FIRSTNAME), RandomizeValue.getRandomString(USER_SECONDNAME), SAMPLE_EMAIL);
-            Game game = new Game(i+1, user, RandomizeValue.getRandomInt(MAX_SCORE), RandomizeValue.getRandomData(), RandomizeValue.getRandomInt(MAX_SCORE));
+            Game game = new Game(i+1, user, RandomizeValue.getRandomData(), RandomizeValue.getRandomInt(MAX_TIME), RandomizeValue.getRandomInt(MAX_SCORE));
             gameList.add(game);
         }
-        Ranking ranking = new Ranking(rankingId, description, gameList);
-        return ranking;
+        return new Ranking(rankingId, description, gameList);
     }
 
     @Override

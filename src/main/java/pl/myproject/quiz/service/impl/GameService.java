@@ -42,7 +42,8 @@ public class GameService implements IGameService{
     @Override
     public Game saveGameResult(User user, Integer score) {
     	LOGGER.info("Running saveGameResult, score is " + score);
-        Game game = new Game(user, score);    
+    	int id = 1; //TODO: generate incrementation
+        Game game = new Game(id, user, score);    
         gameList.add(game);
         dao.add(game);
         return game;

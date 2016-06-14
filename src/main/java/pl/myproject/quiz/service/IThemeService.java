@@ -21,5 +21,5 @@ public interface IThemeService {
 	/**
 	 * @return
 	 */
-	public Map<String, Theme> getThemesl();
+	public Map<String, Theme> getThemes();
 }
