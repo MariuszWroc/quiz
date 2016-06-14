@@ -12,5 +12,9 @@ import pl.myproject.quiz.model.Game;
 */
 @Local
 public interface IGameDao extends IAbstractDao<Game>{
+	/**
+	 * @param numberOfGames
+	 * @return
+	 */
 	public List<Game> populateRandomGame(int numberOfGames);
 }

@@ -18,5 +18,8 @@ import pl.myproject.quiz.model.Theme;
 
 @Local
 public interface IThemeService {
-	public Map<String, Theme> getThemes();
+	/**
+	 * @return
+	 */
+	public Map<String, Theme> getThemesl();
 }

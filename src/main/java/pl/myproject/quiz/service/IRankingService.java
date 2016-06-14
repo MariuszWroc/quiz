@@ -26,7 +26,7 @@ public interface IRankingService {
     public List<Ranking> getRankingList();
 
     /**
-     *
+     * @param ranking
      */
     public void addRankingList(Ranking ranking);
 }

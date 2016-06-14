@@ -12,5 +12,9 @@ import pl.myproject.quiz.model.Answer;
 */
 @Local
 public interface IAnswerDao {
+	/**
+	 * @param answersNumberPerQuestion
+	 * @return
+	 */
 	public List<Answer> populateRandomAnswer(int answersNumberPerQuestion);
 }

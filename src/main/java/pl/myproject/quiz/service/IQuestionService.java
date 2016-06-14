@@ -18,12 +18,20 @@ import pl.myproject.quiz.model.Question;
 @Local
 public interface IQuestionService {
 
-    /**
-     *
-     * @return
-     */
+	/**
+	 * @param entity
+	 */
 	public void deleteQuestionFromDB(Question entity);
+	/**
+	 * @param entityList
+	 */
 	public void saveAllQuestionInDB(List<Question> entityList);
+	/**
+	 * @param entity
+	 */
 	public void saveQuestionInDB(Question entity);
+	/**
+	 * 
+	 */
 	public void loadQuestionInDB();
 }

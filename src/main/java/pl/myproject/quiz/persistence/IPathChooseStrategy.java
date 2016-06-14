@@ -9,6 +9,7 @@ package pl.myproject.quiz.persistence;
  *
  * @author Mariusz Czarny
  */
+@FunctionalInterface
 public interface IPathChooseStrategy {
     /**
      *

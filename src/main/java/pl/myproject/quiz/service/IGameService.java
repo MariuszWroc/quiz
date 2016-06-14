@@ -26,5 +26,10 @@ public interface IGameService {
      */
     public List<Game> getGameList();
 
+    /**
+     * @param user
+     * @param score
+     * @return
+     */
     public Game saveGameResult(User user, Integer score);
 }
