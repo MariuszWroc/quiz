@@ -1,7 +1,6 @@
 package pl.myproject.quiz.controller;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.logging.Logger;
 
 import javax.enterprise.context.SessionScoped;
@@ -9,7 +8,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import pl.myproject.quiz.model.Game;
 import pl.myproject.quiz.model.User;
 import pl.myproject.quiz.service.IGameService;
 
