@@ -27,7 +27,7 @@ public class QuestionService implements IQuestionService {
     private IQuestionDao dao;
     
     @Override
-    public void loadQuestionInDB() {
+    public void getQuestionsFromDB() {
         dao.findAll();
     }
 
@@ -45,6 +45,11 @@ public class QuestionService implements IQuestionService {
 
     @Override
     public void deleteQuestionFromDB(Question entity) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    } 
+    
+    @Override
+    public void deleteAllQuestionFromDB(Question entity) {
         throw new UnsupportedOperationException("Not supported yet.");
     } 
 

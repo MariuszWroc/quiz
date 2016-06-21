@@ -33,5 +33,6 @@ public interface IQuestionService {
 	/**
 	 * 
 	 */
-	public void loadQuestionInDB();
+	public void getQuestionsFromDB();
+	public void deleteAllQuestionFromDB(Question entity);
 }

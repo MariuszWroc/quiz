@@ -9,6 +9,8 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.DependsOn;
+import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
@@ -16,6 +18,7 @@ import javax.inject.Inject;
 import pl.myproject.quiz.model.Question;
 import pl.myproject.quiz.persistence.IQuestionDao;
 import pl.myproject.quiz.service.IQuestionPoolService;
+import pl.myproject.quiz.service.IQuestionService;
 
 /**
  *
@@ -23,11 +26,15 @@ import pl.myproject.quiz.service.IQuestionPoolService;
  */
 @Singleton
 @Startup
+@DependsOn("QuestionService")
 public class QuestionPoolService implements IQuestionPoolService{
     private static final Logger LOGGER = Logger.getLogger(QuestionPoolService.class.getName());
     
     @Inject
     private IQuestionDao dao;
+    
+    @EJB
+    IQuestionService questionService;
 
     @PostConstruct
     public void init() {

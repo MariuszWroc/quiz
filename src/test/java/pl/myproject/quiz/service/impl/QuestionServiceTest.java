@@ -35,7 +35,7 @@ public class QuestionServiceTest {
     	logger.info("loadQuestionInDB");
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
         IQuestionService instance = (IQuestionService)container.getContext().lookup("java:global/classes/QuestionService");
-        instance.loadQuestionInDB();
+        instance.getQuestionsFromDB();
         container.close();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
